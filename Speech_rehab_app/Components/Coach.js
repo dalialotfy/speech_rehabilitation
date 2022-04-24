@@ -2,10 +2,12 @@ import React from 'react'
 import { Text,Button,StyleSheet ,ImageBackground} from 'react-native'
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
+import Dropdown from './Dropdown';
 export default function Coach() {
 
 /////////////////////////////// Random Name /////////////////////////////////////////
 let [randomNames,setRandomNames] = useState("الكلمة")
+let [progress,setProgress]=useState(0)
 async function random()
 {
 // let Names = ["طارق","أميرة","ميار","رضوى","داليا"];
@@ -21,7 +23,7 @@ console.log(finalResponse.Aud_Name)
 /////////////////////////////// Listen to db /////////////////////////////////////////
 async function listen_db()
 {
-    let response = await fetch("")
+    let response = await fetch("http://127.0.0.1:8000/play_random")
     let finalResponse = await response.json()
    
 }
@@ -30,7 +32,7 @@ let[record , setRecord ]= useState("سجل صوتك")
 async function record_ur_voice()
 {
     setRecord("التسجيل يبدأ ...")  
-    let response = await fetch("http://192.168.1.17:8090/record")
+    let response = await fetch("http://127.0.0.1:8000/record")
     let finalResponse = await response.json()
    
 }
@@ -39,14 +41,23 @@ async function record_ur_voice()
 async function listen_ur_voice()
 {
     setRecord("سجل صوتك")
-    let response = await fetch("http://192.168.1.17:8090/play")
+    let response = await fetch("http://127.0.0.1:8000/play")
     let finalResponse = await response.json() 
+}
+// ////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////Similarity ///////////////////////////////////////////
+async function similarity()
+{
+    setRecord("سجل صوتك")
+    let response = await fetch("http://127.0.0.1:8000/similarity")
+    let finalResponse = await response.json() 
+    setProgress(finalResponse.Score)
 }
   return (
       <>
     <ImageBackground source={require('../assets/coach.jpg')} resizeMode='cover' style={styles.image}>
       <View style={styles.container}>
-          <View style={styles.square}>
+          <View style={styles.square}> 
       <View style={styles.spaceText}><Text style={styles.title}>{randomNames}</Text></View>
 <View style={styles.space}><Button style={styles.button1} color='purple'  title= 'أظهر اسما عشوائيا'onPress={() =>{random()}}/>
 </View>
@@ -56,8 +67,10 @@ async function listen_ur_voice()
 </View>
 <View style={styles.space}>    <Button style={styles.button1} color='purple' title= 'شغل صوتك'onPress={() =>{listen_ur_voice()}}/>
 </View>
-<View style={styles.space}>    <Button style={styles.button1} color='purple' title= 'مستوى التقدم'onPress={() =>{console.log("progress")}}/></View>
-</View></View>
+<View style={styles.space}>    <Button style={styles.button1} color='purple' title= 'مستوى التقدم'onPress={() =>{similarity()}}/></View>
+<View style={styles.space}> <Text style={styles.title}>{progress}</Text> </View>
+</View>
+</View>
 </ImageBackground>
     </>
   )

@@ -2,6 +2,8 @@ import React from 'react'
 import { Text,Button,StyleSheet ,ImageBackground} from 'react-native'
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
+import DropDownPicker from 'react-native-dropdown-picker';
+import Dropdown from './Dropdown';
 export default function Coach() {
 
 
@@ -42,8 +44,22 @@ async function listen_ur_voice()
       
       <View style={styles.space}>
           <View style={styles.div}>
-          <View style={styles.space}> <Button title='hhhhhh' color='rgba(238, 130, 238,0.7)'/></View>
+          <View style={styles.space}> <Button title='أشخاص' color='rgba(238, 130, 238,0.7)'/>
+          <Dropdown/>
+          <Button title='أفعال' color='rgba(238, 130, 238,0.7)'/>
+          <Dropdown/>
+          <Button title='طعام' color='rgba(238, 130, 238,0.7)'/>
+          <Dropdown/>
+         <Button title='ملابس' color='rgba(238, 130, 238,0.7)'/>
+         <Dropdown/>
+         <Button title='مطبخ' color='rgba(238, 130, 238,0.7)'/>
+         <Dropdown/>
+         <Button title='ألوان' color='rgba(238, 130, 238,0.7)'/>
+         <Dropdown/>
+      
 
+
+          </View>
           </View>
           
           </View>
@@ -53,29 +69,6 @@ async function listen_ur_voice()
     </>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const styles = StyleSheet.create({
 
@@ -92,12 +85,12 @@ const styles = StyleSheet.create({
     },
     button1:
     {
-        display:'flex',
-        alignItems:'center',
-        justifyContent:'center',
-        marginTop:150,
-        marginBottom:250,
-        padding:3,
+        // display:'flex',
+        // alignItems:'center',
+        // justifyContent:'center',
+        // marginTop:150,
+        // marginBottom:250,
+        // padding:3,
   
       
   
@@ -121,11 +114,12 @@ const styles = StyleSheet.create({
     },
     space:
     {
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
-        width:100,
-        height:500
+        // display:'flex',
+        // justifyContent:'center',
+        // alignItems:'center',
+        width:200,
+        height:40,
+        // margin:'auto'        
     },
     spaceText:
     {
@@ -138,9 +132,10 @@ const styles = StyleSheet.create({
     {
         width:1100,
         height:700,
+      
         backgroundColor:'rgba(238, 130, 238,0.7)',
         display:'flex',
-        // justifyContent:'center',
+        justifyContent:'flex-start',
         alignItems:'center'
 
     },
@@ -158,6 +153,7 @@ const styles = StyleSheet.create({
     {
         width:700,
         height:450,
+        margin:'auto',
         backgroundColor:'purple',
         display:'flex',
         justifyContent:'center',

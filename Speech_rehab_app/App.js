@@ -10,6 +10,7 @@ import Register from './Components/Register';
 import Speech from './Components/Speech';
 import Assistant from './Components/Assistant';
 import Coach from './Components/Coach';
+import Dropdown from './Components/Dropdown';
 const Stack = createStackNavigator();
 export default function App() {
 

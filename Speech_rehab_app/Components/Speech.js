@@ -18,12 +18,14 @@ export default function Speech(props) {
       title= 'Assistant Mode'
       onPress={() =>
        {props.navigation.navigate("Assistant")}}
-    /></View>
+    />
+    </View>
    <View style={styles.space}>
         <Button style={styles.button1}
       title= 'Coach Mode'
       onPress={() =>{props.navigation.navigate("Coach")}}
-    /></View> 
+    />
+    </View> 
   </View>
   </ImageBackground></>
   )
