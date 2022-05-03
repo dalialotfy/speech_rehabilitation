@@ -11,6 +11,7 @@ import Speech from './Components/Speech';
 import Assistant from './Components/Assistant';
 import Coach from './Components/Coach';
 import Dropdown from './Components/Dropdown';
+import Modaal from './Components/Modaal';
 const Stack = createStackNavigator();
 export default function App() {
 
@@ -40,6 +41,10 @@ export default function App() {
         <Stack.Screen
             name="Coach"
             component={Coach}
+          />
+          <Stack.Screen
+            name="Modaal"
+            component={Modaal}
           />
         </Stack.Navigator>
       </NavigationContainer>

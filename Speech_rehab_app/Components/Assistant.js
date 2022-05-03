@@ -4,8 +4,15 @@ import { View } from 'react-native';
 import { useEffect, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Dropdown from './Dropdown';
-export default function Coach() {
+import Modaal from './Modaal';
+export default function Assistant() {
 
+let names =["علاء","اسماعيل","حسن","محمد","احمد","توفيق"]
+let food = ["لحمة","فراخ","ارز","سمك","فلفل","طماطم"]
+let [detail,setDetail]=useState([])
+
+let categName=names.map(name=>name)
+detail=categName.join("\n")
 
 //////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////// Listen to db /////////////////////////////////////////
@@ -24,16 +31,43 @@ async function record_ur_voice()
 }
 // ////////////////////////////////////////////////////////////////////////////////////////
 // //////////////////////////listen to ur voice ///////////////////////////////////////////
-async function listen_ur_voice()
+ async function listen_()
 {
-    let response = await fetch("http://192.168.1.17:8090/play")
-    let finalResponse = await response.json()
-   
+    let response =await fetch('http://127.0.0.1:8000/category', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+       table:"أشخاص"
+      })
+        
+    })
+    // let json= await response.json
+    // let finalNames=json.Names
+  //  let categName=finalNames.map(name=>name)
+  //  detail=categName.join("\n")
+   console.log(response.json.Names)
+
 }
-
-
-
-
+// async function record()
+// {
+//     let response = await fetch("http://127.0.0.1:8000/category")
+//     let finalResponse = await response.json()
+//     console.log(finalResponse)
+// }
+listen_()
+// function click()
+// {
+//   if (props.categ=='أشخاص')
+//   {
+//      console.log(props.categ)
+//   }
+// }
+// console.log(p)
+// record()
+let categs = ['أشخاص','أفعال','ملابس','طعام','أجهزة كهربائية','غرف النوم','مطبخ','غرف المعيشة','ألوان','أسماءالغرف','أدوات مدرسية']
   return (
       <>
     <ImageBackground source={require('../assets/coach.jpg')} resizeMode='cover' style={styles.image}>
@@ -41,9 +75,20 @@ async function listen_ur_voice()
           <View style={styles.square}>
       <View style={styles.spaceText}><Text style={styles.title}>كوّن جُملتك ...</Text></View>
       <View style={styles.spaceText}><Text style={styles.sentence}></Text></View>
-      
+      <Modaal categ={categs[0]}details={detail}/>
+      <Modaal categ={categs[1]}/> 
+      <Modaal categ={categs[2]}/> 
+      <Modaal categ={categs[3]}/> 
+      <Modaal categ={categs[4]}/> 
+      <Modaal categ={categs[5]}/>
+       <Modaal categ={categs[6]}/>
+        <Modaal categ={categs[7]}/>
+        <Modaal categ={categs[8]}/>
+        <Modaal categ={categs[9]}/>
+        <Modaal categ={categs[10]}/>
+
       <View style={styles.space}>
-          <View style={styles.div}>
+          {/* <View style={styles.div}>
           <View style={styles.space}> <Button title='أشخاص' color='rgba(238, 130, 238,0.7)'/>
           <Dropdown/>
           <Button title='أفعال' color='rgba(238, 130, 238,0.7)'/>
@@ -59,8 +104,8 @@ async function listen_ur_voice()
       
 
 
-          </View>
-          </View>
+          </View> */}
+          {/* </View> */}
           
           </View>
 

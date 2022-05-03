@@ -9,6 +9,12 @@ export default function Login(props) {
     title= 'Login'
     onPress={() =>
      {props.navigation.navigate("Speech")}}
-  /></>
+  />
+      <Button 
+    title= 'Modaal'
+    onPress={() =>
+     {props.navigation.navigate("Modaal")}}
+  />
+  </>
   )
 }
