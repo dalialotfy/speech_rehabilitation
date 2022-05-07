@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 
 import { useEffect, useState } from 'react';
 import { ImageBackground } from 'react-native';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+
 const img = {uri:"voice.jpg"}
 export default function Home(props) {
 
@@ -14,17 +16,20 @@ export default function Home(props) {
     <View style ={styles.container} >
       <View style={styles.spaceText}><Text style={styles.title}>Speech Rehabilitation App</Text>
 </View>
+{/* <Icon name="rocket" size={30} color="#900" /> */}
 <View style={styles.space}>
     <Button 
       title= 'Login'
       onPress={() =>
        {props.navigation.navigate("Login")}}
-    /></View>
+    />
+    </View>
  <View style={styles.space}> 
         <Button style={styles.button1}
       title= 'Register'
       onPress={() =>{props.navigation.navigate("Register")}}
-    /></View>  </View>
+    /></View>  
+    </View>
     </ImageBackground>
   </>
   )

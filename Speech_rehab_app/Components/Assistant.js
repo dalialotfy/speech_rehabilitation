@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Dropdown from './Dropdown';
 import Modaal from './Modaal';
-export default function Assistant() {
+export default function Assistant(props) {
 
 let names =["علاء","اسماعيل","حسن","محمد","احمد","توفيق"]
 let food = ["لحمة","فراخ","ارز","سمك","فلفل","طماطم"]
@@ -31,56 +31,41 @@ async function record_ur_voice()
 }
 // ////////////////////////////////////////////////////////////////////////////////////////
 // //////////////////////////listen to ur voice ///////////////////////////////////////////
- async function listen_()
-{
-    let response =await fetch('http://127.0.0.1:8000/category', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-       table:"أشخاص"
-      })
+//  async function listen_()
+// {
+//     let response =await fetch('http://127.0.0.1:8000/category', {
+//       method: 'POST',
+//       headers: {
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//        table:"أشخاص"
+//       })
         
-    })
-    // let json= await response.json
-    // let finalNames=json.Names
-  //  let categName=finalNames.map(name=>name)
-  //  detail=categName.join("\n")
-   console.log(response.json.Names)
+//     })
+//     // let json= await response.json
+//     // let finalNames=json.Names
+//   //  let categName=finalNames.map(name=>name)
+//   //  detail=categName.join("\n")
+//    console.log(response.json.Names)
 
-}
-// async function record()
-// {
-//     let response = await fetch("http://127.0.0.1:8000/category")
-//     let finalResponse = await response.json()
-//     console.log(finalResponse)
 // }
-listen_()
-// function click()
-// {
-//   if (props.categ=='أشخاص')
-//   {
-//      console.log(props.categ)
-//   }
-// }
-// console.log(p)
-// record()
-let categs = ['أشخاص','أفعال','ملابس','طعام','أجهزة كهربائية','غرف النوم','مطبخ','غرف المعيشة','ألوان','أسماءالغرف','أدوات مدرسية']
-  return (
+
+let categs = ['أشخاص','أفعال','ملابس','طعام','أجهزة_كهربائية','غرف_النوم','مطبخ','غرفة_المعيشة','ألوان','أسامي_الغرف','أدوات_مدرسية']
+return (
       <>
     <ImageBackground source={require('../assets/coach.jpg')} resizeMode='cover' style={styles.image}>
       <View style={styles.container}>
           <View style={styles.square}>
       <View style={styles.spaceText}><Text style={styles.title}>كوّن جُملتك ...</Text></View>
       <View style={styles.spaceText}><Text style={styles.sentence}></Text></View>
-      <Modaal categ={categs[0]}details={detail}/>
-      <Modaal categ={categs[1]}/> 
-      <Modaal categ={categs[2]}/> 
-      <Modaal categ={categs[3]}/> 
-      <Modaal categ={categs[4]}/> 
-      <Modaal categ={categs[5]}/>
+      <Modaal categ={categs[0]} icon="address-book-o"/>
+      <Modaal categ={categs[1]} icon="walking"/> 
+      <Modaal categ={categs[2]} icon="skin"/> 
+      <Modaal categ={categs[3]} icon="bread-slice"/> 
+      <Modaal categ={categs[4]} icon="laptop"/> 
+      <Modaal categ={categs[5]} icon ="bed"/>
        <Modaal categ={categs[6]}/>
         <Modaal categ={categs[7]}/>
         <Modaal categ={categs[8]}/>

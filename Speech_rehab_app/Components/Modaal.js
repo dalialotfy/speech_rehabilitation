@@ -2,23 +2,49 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Modaal = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
-  let categs = ['أشخاص','أفعال','ملابس','طعام','أجهزة كهربائية','غرف النوم','مطبخ','غرف المعيشة','ألوان','أسماءالغرف','أدوات مدرسية']
-//fun fetch w ab3t fel api {categs[i]} w a7ot elfun de fe click() w a3ml equal lel result m3 detail
-  function click()
+  let categs = ['أشخاص','أفعال','ملابس','طعام','أجهزة_كهربائية','غرف_النوم','مطبخ','غرفة_المعيشة','ألوان','أسامي_الغرف','أدوات_مدرسية']
+//fun fetch w ab3t fel api query{categs[i]} w a7ot elfun de fe click() w a3ml equal lel result m3 detail
+  let [detail,setDetail]=useState([])
+  let [path,setPath]=useState('')
+async function click()
   {
     setModalVisible(true)
-    for(let i=0;i<12;i++)
+    for(let c=0;c<12;c++)
     {
-      if (props.categ==categs[i])
+      if (props.categ==categs[c])
       {
-         console.log(categs[i])
-  
+         console.log(categs[c])
+         let response = await fetch(`http://127.0.0.1:8000/category/?table=${categs[c]}`)
+         let finalResponse = await response.json()
+         console.log(finalResponse.Names)
+        //  let categName=(finalResponse.Names).map(name=>name)
+        // detail=categName.join("\n")
+        setDetail(finalResponse.Names)
+        setPath(finalResponse.Paths)
+       
+        // for(let i=0 ; i<(finalResponse.Names).length;i++)
+        // {
+        //   console.log(finalResponse.Names[i])
+         
+        
+          
+        // }
+
+       
       }
     }
+  }
 
+  async function listen_db()
+  {
+    //setModalVisible(true)
+      let response = await fetch("http://127.0.0.1:8000/play_random")
+      let finalResponse = await response.json()
+     
   }
   return (
     <View style={styles.centeredView}>
@@ -34,14 +60,14 @@ const Modaal = (props) => {
         
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Pressable onPress={()=>console.log("pressed!")}>
-            <Text style={styles.modalText}>{props.details}</Text></Pressable>
+            {detail.map((name,index)=><Pressable key={index} onPress={()=>console.log(index+1)}>
+            <Text key={index} style={styles.modalText}>{name}</Text>
+            </Pressable>)}
             <Pressable
         style={[styles.button, styles.buttonClose]}
-        onPress={() => setModalVisible(true)}
+        onPress={() => listen_db()}
       >
-        
-        <Text style={styles.textStyle}>اسمع ما اخترته</Text>
+        <Text style={styles.textStyle} >اسمع ما اخترته</Text>
       </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
@@ -59,7 +85,8 @@ const Modaal = (props) => {
         style={[styles.button, styles.buttonOpen]}
         onPress={() => click()}
       >
-        <Text style={styles.textStyle}>{props.categ}</Text>
+        <Text style={styles.textStyle}><Icon name={props.icon} size={30} color="white" />  {props.categ}</Text>
+        
       </Pressable>
    
     </View>

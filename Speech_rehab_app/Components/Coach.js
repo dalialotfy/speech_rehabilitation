@@ -59,16 +59,23 @@ async function similarity()
       <View style={styles.container}>
           <View style={styles.square}> 
       <View style={styles.spaceText}><Text style={styles.title}>{randomNames}</Text></View>
-<View style={styles.space}><Button style={styles.button1} color='purple'  title= 'أظهر اسما عشوائيا'onPress={() =>{random()}}/>
+<View style={styles.space}>
+    <Button style={styles.button1} color='purple'  title= 'أظهر اسما عشوائيا'onPress={() =>{random()}}/>
 </View>
-<View style={styles.space}><Button style={styles.button1} color='purple'  title= 'شغل النطق السليم'onPress={() =>{listen_db()}}/>
+<View style={styles.space}>
+    <Button style={styles.button1} color='purple'  title= 'شغل النطق السليم'onPress={() =>{listen_db()}}/>
 </View>
-<View style={styles.space}><Button style={styles.button1} color='purple' title={record} onPress={() =>{record_ur_voice()}}/>
+<View style={styles.space}
+><Button style={styles.button1} color='purple' title={record} onPress={() =>{record_ur_voice()}}/>
 </View>
-<View style={styles.space}>    <Button style={styles.button1} color='purple' title= 'شغل صوتك'onPress={() =>{listen_ur_voice()}}/>
+<View style={styles.space}>    
+<Button style={styles.button1} color='purple' title= 'شغل صوتك'onPress={() =>{listen_ur_voice()}}/>
 </View>
-<View style={styles.space}>    <Button style={styles.button1} color='purple' title= 'مستوى التقدم'onPress={() =>{similarity()}}/></View>
-<View style={styles.space}> <Text style={styles.title}>{progress}</Text> </View>
+<View style={styles.space}>   
+ <Button style={styles.button1} color='purple' title= 'مستوى التقدم'onPress={() =>{similarity()}}/></View>
+<View style={styles.space}>
+     <Text style={styles.title}>{progress}</Text>
+      </View>
 </View>
 </View>
 </ImageBackground>

@@ -211,3 +211,51 @@ def play_audio():
     status = sd.wait()  # Wait until file is done playing
     print("play")
     return jsonify(play)
+
+
+
+@audios.route("/category/",methods=['POST','GET'])
+def GetCategory():
+    if request.method == 'POST':
+        data = request.get_json()
+        table=data["table"]
+    elif request.method == 'GET':
+        print(Random_ID,' ',Random_Name,' ',Random_Path)
+        table = request.args.get('table')
+    else :
+        return "Error"
+    mydb,mycursor=DB_Connection()
+    mycursor.execute("USE AUDIOS")
+    sql = "SELECT Aud_ID,Name,Path FROM {}".format(table)
+    mycursor.execute(sql)
+    Data = mycursor.fetchall()
+    id=[]
+    Names=[]
+    Paths=[]
+    for index in Data:
+        id.append(index[0])
+        Names.append(index[1])
+        Paths.append(index[2])
+    return jsonify(id=id,Names=Names,Paths=Paths)
+
+
+# @audios.route("/category",methods=['POST'])
+# def GetCategory():
+#     if request.method == 'POST':
+#         data = request.get_json()
+#         print(data)
+#         mydb,mycursor=DB_Connection()
+#         mycursor.execute("USE AUDIOS")
+#         sql = "SELECT Name,Path FROM {}".format(data["table"])
+#         mycursor.execute(sql)
+#         Data = mycursor.fetchall()
+#         Names=[]
+#         Paths=[]
+#         # print(names)
+#         for index in Data:
+#             Names.append(index[0])
+#             Paths.append(index[1])
+#         # return jsonify(Data=names)
+#         return jsonify(Names=Names,Paths=Paths)
+#     else :
+#         return "Error"
