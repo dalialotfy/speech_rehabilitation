@@ -3,6 +3,7 @@ import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { ScrollView } from "react-native";
 
 const Modaal = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -10,6 +11,7 @@ const Modaal = (props) => {
 //fun fetch w ab3t fel api query{categs[i]} w a7ot elfun de fe click() w a3ml equal lel result m3 detail
   let [detail,setDetail]=useState([])
   let [path,setPath]=useState('')
+  let count=0
 async function click()
   {
     setModalVisible(true)
@@ -25,7 +27,7 @@ async function click()
         // detail=categName.join("\n")
         setDetail(finalResponse.Names)
         setPath(finalResponse.Paths)
-       
+        count=finalResponse.Names.length
         // for(let i=0 ; i<(finalResponse.Names).length;i++)
         // {
         //   console.log(finalResponse.Names[i])
@@ -39,16 +41,26 @@ async function click()
     }
   }
 
-  async function listen_db()
+  async function listen_db(id)
   {
+    
     //setModalVisible(true)
-      let response = await fetch("http://127.0.0.1:8000/play_random")
+    for(let c=0;c<12;c++)
+    {
+      if (props.categ==categs[c])
+      {
+      let response = await fetch(`http://127.0.0.1:8000/findname/?table=${categs[c]}&id=${id}`)
       let finalResponse = await response.json()
-     
+      // let path= finalResponse.path
+      // console.log(path)
+      }}
   }
+  
   return (
     <View style={styles.centeredView}>
+  
       <Modal
+      propagateSwipe={true}
         animationType="fade"
         transparent={true}
         visible={modalVisible}
@@ -59,8 +71,9 @@ async function click()
       >
         
         <View style={styles.centeredView}>
+        <ScrollView>
           <View style={styles.modalView}>
-            {detail.map((name,index)=><Pressable key={index} onPress={()=>console.log(index+1)}>
+            {detail.map((name,index)=><Pressable key={index} onPress={()=>listen_db(index+1)}>
             <Text key={index} style={styles.modalText}>{name}</Text>
             </Pressable>)}
             <Pressable
@@ -75,9 +88,10 @@ async function click()
             >
               <Text style={styles.textStyle}>إغلاق</Text>
             </Pressable>
-
+     
       
           </View>
+          </ScrollView>
         </View>
 
       </Modal>
@@ -88,7 +102,7 @@ async function click()
         <Text style={styles.textStyle}><Icon name={props.icon} size={30} color="white" />  {props.categ}</Text>
         
       </Pressable>
-   
+ 
     </View>
   );
 };

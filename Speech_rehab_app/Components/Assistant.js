@@ -2,9 +2,11 @@ import React from 'react'
 import { Text,Button,StyleSheet ,ImageBackground} from 'react-native'
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
-import DropDownPicker from 'react-native-dropdown-picker';
-import Dropdown from './Dropdown';
+// import DropDownPicker from 'react-native-dropdown-picker';
+// import Dropdown from './Dropdown';
 import Modaal from './Modaal';
+import { ScrollView } from 'react-native';
+
 export default function Assistant(props) {
 
 let names =["علاء","اسماعيل","حسن","محمد","احمد","توفيق"]
@@ -22,35 +24,6 @@ async function listen_db()
     let finalResponse = await response.json()
    
 }
-// //////////////////////////record ur voice ///////////////////////////////////////////
-async function record_ur_voice()
-{
-    let response = await fetch("http://192.168.1.17:8090/record")
-    let finalResponse = await response.json()
-   
-}
-// ////////////////////////////////////////////////////////////////////////////////////////
-// //////////////////////////listen to ur voice ///////////////////////////////////////////
-//  async function listen_()
-// {
-//     let response =await fetch('http://127.0.0.1:8000/category', {
-//       method: 'POST',
-//       headers: {
-//         Accept: 'application/json',
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//        table:"أشخاص"
-//       })
-        
-//     })
-//     // let json= await response.json
-//     // let finalNames=json.Names
-//   //  let categName=finalNames.map(name=>name)
-//   //  detail=categName.join("\n")
-//    console.log(response.json.Names)
-
-// }
 
 let categs = ['أشخاص','أفعال','ملابس','طعام','أجهزة_كهربائية','غرف_النوم','مطبخ','غرفة_المعيشة','ألوان','أسامي_الغرف','أدوات_مدرسية']
 return (
@@ -60,17 +33,18 @@ return (
           <View style={styles.square}>
       <View style={styles.spaceText}><Text style={styles.title}>كوّن جُملتك ...</Text></View>
       <View style={styles.spaceText}><Text style={styles.sentence}></Text></View>
-      <Modaal categ={categs[0]} icon="address-book-o"/>
-      <Modaal categ={categs[1]} icon="walking"/> 
-      <Modaal categ={categs[2]} icon="skin"/> 
-      <Modaal categ={categs[3]} icon="bread-slice"/> 
-      <Modaal categ={categs[4]} icon="laptop"/> 
-      <Modaal categ={categs[5]} icon ="bed"/>
-       <Modaal categ={categs[6]}/>
-        <Modaal categ={categs[7]}/>
-        <Modaal categ={categs[8]}/>
-        <Modaal categ={categs[9]}/>
-        <Modaal categ={categs[10]}/>
+
+      <Modaal  categ={categs[0]} icon="address-book-o"/>
+      <Modaal  categ={categs[1]} icon="play-circle"/> 
+      <Modaal  categ={categs[2]} icon="shopping-bag"/> 
+      <Modaal  categ={categs[3]} icon="coffee"/> 
+      <Modaal  categ={categs[4]} icon="laptop"/> 
+      <Modaal  categ={categs[5]} icon ="bed"/>
+      <Modaal categ={categs[6]}   icon ="coffee"/>
+      <Modaal  categ={categs[7]} icon="home"/>
+      <Modaal categ={categs[8]} icon='filter'/>
+      <Modaal categ={categs[9]}icon='codepen'/>
+      <Modaal categ={categs[10]} icon='briefcase' />
 
       <View style={styles.space}>
           {/* <View style={styles.div}>
