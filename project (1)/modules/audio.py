@@ -239,23 +239,18 @@ def GetCategory():
     return jsonify(id=id,Names=Names,Paths=Paths)
 
 
-# @audios.route("/category",methods=['POST'])
-# def GetCategory():
-#     if request.method == 'POST':
-#         data = request.get_json()
-#         print(data)
-#         mydb,mycursor=DB_Connection()
-#         mycursor.execute("USE AUDIOS")
-#         sql = "SELECT Name,Path FROM {}".format(data["table"])
-#         mycursor.execute(sql)
-#         Data = mycursor.fetchall()
-#         Names=[]
-#         Paths=[]
-#         # print(names)
-#         for index in Data:
-#             Names.append(index[0])
-#             Paths.append(index[1])
-#         # return jsonify(Data=names)
-#         return jsonify(Names=Names,Paths=Paths)
-#     else :
-#         return "Error"
+
+
+@audios.route("/findname/",methods=['GET'])
+def findname ():
+    table = request.args.get('table')
+    id = request.args.get('id')
+    mydb,mycursor=DB_Connection()
+    mycursor.execute("USE AUDIOS")
+    sql = "SELECT Name,Path FROM {} WHERE Aud_ID ={}".format(table,id)
+    mycursor.execute(sql)
+    path = mycursor.fetchall()
+    data, fs = sf.read(path[0][1], dtype='float32')  
+    play=sd.play(data, fs)
+    # return jsonify(path=path[0][1])
+    return jsonify(play)
