@@ -4,11 +4,31 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { useEffect, useState } from 'react';
 import { ImageBackground } from 'react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome';
-
+// import sound from 'react-native-sound';
 const img = {uri:"voice.jpg"}
 export default function Home(props) {
 
-       
+//  function play()
+//  {
+//    var Sound=require('react-native-sound')
+//   var audio = new Sound(
+//     'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3',
+//     null,
+//     error => {
+//       if (error) {
+//         console.log('failed to load the sound', error);
+//         return;
+//       }
+//       // if loaded successfully
+//       console.log(
+//         'duration in seconds: ' +
+//           audio.getDuration() +
+//           'number of channels: ' +
+//           audio.getNumberOfChannels(),
+//       );
+//     },
+//   );
+//  }
   return (
       <>
     <ImageBackground  source={require('../assets/voice.jpg')} resizeMode='cover' style={styles.image}>
@@ -29,6 +49,11 @@ export default function Home(props) {
       title= 'Register'
       onPress={() =>{props.navigation.navigate("Register")}}
     /></View>  
+     {/* <View style={styles.space}> 
+        <Button style={styles.button1}
+      title= 'PLAY'
+      onPress={() =>{play()}}
+    /></View>  */}
     </View>
     </ImageBackground>
   </>

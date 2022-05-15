@@ -3,6 +3,7 @@ import { Text,Button,StyleSheet ,ImageBackground} from 'react-native'
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
 import Dropdown from './Dropdown';
+let Ip='192.168.1.17'
 export default function Coach() {
 
 /////////////////////////////// Random Name /////////////////////////////////////////
@@ -14,7 +15,7 @@ async function random()
 // randomNames = Names[Math.floor(Math.random()*Names.length)];
 // console.log(randomNames)
 // setRandomNames(randomNames)
-let response = await fetch("http://127.0.0.1:8000/random_audio")
+let response = await fetch(`http://${Ip}:8000/random_audio`)
 let finalResponse = await response.json()
 setRandomNames(finalResponse.Aud_Name)
 console.log(finalResponse.Aud_Name)
@@ -23,7 +24,7 @@ console.log(finalResponse.Aud_Name)
 /////////////////////////////// Listen to db /////////////////////////////////////////
 async function listen_db()
 {
-    let response = await fetch("http://127.0.0.1:8000/play_random")
+    let response = await fetch(`http://${Ip}:8000/play_random`)
     let finalResponse = await response.json()
    
 }
@@ -32,7 +33,7 @@ let[record , setRecord ]= useState("سجل صوتك")
 async function record_ur_voice()
 {
     setRecord("التسجيل يبدأ ...")  
-    let response = await fetch("http://127.0.0.1:8000/record")
+    let response = await fetch(`http://${Ip}:8000/record`)
     let finalResponse = await response.json()
    
 }
@@ -41,7 +42,7 @@ async function record_ur_voice()
 async function listen_ur_voice()
 {
     setRecord("سجل صوتك")
-    let response = await fetch("http://127.0.0.1:8000/play")
+    let response = await fetch(`http://${Ip}:8000/play`)
     let finalResponse = await response.json() 
 }
 // ////////////////////////////////////////////////////////////////////////////////////////
@@ -49,7 +50,10 @@ async function listen_ur_voice()
 async function similarity()
 {
     setRecord("سجل صوتك")
-    let response = await fetch("http://127.0.0.1:8000/similarity")
+    // let response = await fetch("http://172.28.134.173:8000/similarity")
+    // let finalResponse = await response.json() 
+    // setProgress(finalResponse.Score)
+    let response = await fetch(`http://${Ip}:8000/similarity`)
     let finalResponse = await response.json() 
     setProgress(finalResponse.Score)
 }

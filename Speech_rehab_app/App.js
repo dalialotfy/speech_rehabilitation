@@ -12,6 +12,8 @@ import Assistant from './Components/Assistant';
 import Coach from './Components/Coach';
 import Dropdown from './Components/Dropdown';
 import Modaal from './Components/Modaal';
+import 'text-encoding-polyfill'
+
 const Stack = createStackNavigator();
 export default function App() {
 

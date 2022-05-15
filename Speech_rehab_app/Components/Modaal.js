@@ -12,6 +12,7 @@ const Modaal = (props) => {
   let [detail,setDetail]=useState([])
   let [path,setPath]=useState('')
   let count=0
+  let Ip='192.168.1.17'
 async function click()
   {
     setModalVisible(true)
@@ -20,7 +21,7 @@ async function click()
       if (props.categ==categs[c])
       {
          console.log(categs[c])
-         let response = await fetch(`http://127.0.0.1:8000/category/?table=${categs[c]}`)
+         let response = await fetch(`http://${Ip}:8000/category/?table=${categs[c]}`)
          let finalResponse = await response.json()
          console.log(finalResponse.Names)
         //  let categName=(finalResponse.Names).map(name=>name)
@@ -49,7 +50,7 @@ async function click()
     {
       if (props.categ==categs[c])
       {
-      let response = await fetch(`http://127.0.0.1:8000/findname/?table=${categs[c]}&id=${id}`)
+      let response = await fetch(`http://${Ip}:8000/findname/?table=${categs[c]}&id=${id}`)
       let finalResponse = await response.json()
       // let path= finalResponse.path
       // console.log(path)
