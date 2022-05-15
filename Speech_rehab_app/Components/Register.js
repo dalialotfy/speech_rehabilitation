@@ -59,12 +59,13 @@ const RegisterScreen = (props) => {
     let validationRespone=ValidationHandler()
     console.log(dataToSend)
     console.log(validationRespone)
+    console.log(text)
    if(validationRespone.error)
    {
      setText(validationRespone.error.details)
-     alert(validationRespone.error)
+    //  alert(validationRespone.error)
    }
-   else{console.log('mfesh error')} //post request if data.message=='sucess' >setLoadingfalse+ yro7 lel login else>serloading false w y3rd el error data.message
+   else{setText([])} //post request if data.message=='sucess' >setLoadingfalse+ yro7 lel login else>serloading false w y3rd el error data.message
     setErrortext('');
     // if (!userName) {
     //   alert(validationRespone.error);
@@ -199,9 +200,9 @@ const RegisterScreen = (props) => {
               {text}
             </Text>
           } */}
-      
+{text&&text.map((message,index)=><View key={index} style={{backgroundColor:'#ff9a98',padding:6,width:'98%',borderRadius:5,marginBottom:5,marginTop:5,display:'flex',justifyContent:'center',alignItems:'center',margin:'auto'}}><Text style={{fontWeight:'bold'}}>{message.message}</Text></View> )}
+
           <View style={styles.SectionStyle}>
-          {/* {text.map((message)=><Text >{message.message}</Text>)} */}
             <TextInput
               style={styles.inputStyle}
               onChangeText={(UserName) => setUserName(UserName)}
