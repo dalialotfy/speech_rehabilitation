@@ -20,7 +20,7 @@ def add_user():
         user = mycursor.fetchall()
         print(user)
         if(user):
-            return jsonify("Sorry, this email already exist")
+            return jsonify({"message":"Sorry, this email already exist"})
         else:
             name=data['name']
             pw=data['pass']
@@ -33,7 +33,7 @@ def add_user():
             mydb.commit() 
             mycursor.close()
             print(mycursor)
-            return "done"
+            return jsonify({"message":"Success"})
     else :
         return "Error"
 

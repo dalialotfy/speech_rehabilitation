@@ -6,29 +6,38 @@ import { ImageBackground } from 'react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 // import sound from 'react-native-sound';
 const img = {uri:"voice.jpg"}
+// import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
+
 export default function Home(props) {
 
-//  function play()
-//  {
-//    var Sound=require('react-native-sound')
-//   var audio = new Sound(
-//     'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3',
-//     null,
-//     error => {
-//       if (error) {
-//         console.log('failed to load the sound', error);
-//         return;
-//       }
-//       // if loaded successfully
-//       console.log(
-//         'duration in seconds: ' +
-//           audio.getDuration() +
-//           'number of channels: ' +
-//           audio.getNumberOfChannels(),
-//       );
-//     },
-//   );
-//  }
+ function play()
+ {
+  //  var Sound=require('react-native-sound')
+  //  Sound.setCategory('Playback');
+
+  // var audio = new Sound(
+  //   'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3',
+  //   null,
+  //   error => {
+  //     if (error) {
+  //       console.log('failed to load the sound', error);
+  //       return;
+  //     }
+  //     // if loaded successfully
+  //     console.log(
+  //       'duration in seconds: ' +
+  //         audio.getDuration() +
+  //         'number of channels: ' +
+  //         audio.getNumberOfChannels(),
+  //     );
+  //   },
+  // );
+  // const url = "http://lacavewebradio.chickenkiller.com:8000/stream.mp3";
+ReactNativeAudioStreaming.pause();
+// ReactNativeAudioStreaming.resume();
+// ReactNativeAudioStreaming.play(url, {showIniOSMediaCenter: true, showInAndroidNotifications: true});
+// ReactNativeAudioStreaming.stop();
+ }
   return (
       <>
     <ImageBackground  source={require('../assets/voice.jpg')} resizeMode='cover' style={styles.image}>
@@ -49,11 +58,11 @@ export default function Home(props) {
       title= 'Register'
       onPress={() =>{props.navigation.navigate("Register")}}
     /></View>  
-     {/* <View style={styles.space}> 
+     <View style={styles.space}> 
         <Button style={styles.button1}
       title= 'PLAY'
       onPress={() =>{play()}}
-    /></View>  */}
+    /></View> 
     </View>
     </ImageBackground>
   </>

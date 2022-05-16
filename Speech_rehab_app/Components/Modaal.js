@@ -52,8 +52,8 @@ async function click()
       {
       let response = await fetch(`http://${Ip}:8000/findname/?table=${categs[c]}&id=${id}`)
       let finalResponse = await response.json()
-      // let path= finalResponse.path
-      // console.log(path)
+      let path= finalResponse.path
+      console.log(path)
       }}
   }
   

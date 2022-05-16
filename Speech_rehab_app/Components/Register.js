@@ -55,7 +55,7 @@ const RegisterScreen = (props) => {
       userAge: Joi.number().integer().min(5).max(50).required(),
       userEmail: Joi.string().email({tlds: { allow: ["com", "net"] }}).required(),
       userAddress:Joi.string().alphanum().min(3).max(30).required(),
-      userGender:Joi.string().alphanum().min(3).max(30).required()
+      userGender:Joi.string().alphanum().min(1).max(30).required()
 
   })
    
@@ -76,7 +76,7 @@ const RegisterScreen = (props) => {
    }
    else{
     setText([])
-    let {data} =await fetch(`http://${Ip}:8000/create`, {
+    let data =await fetch(`http://${Ip}:8000/create`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -88,18 +88,22 @@ const RegisterScreen = (props) => {
 
       })
     });  
-  //   if (data.message=='success')
-  //   {
-  //        //Navigate To login
-  // props.navigation.navigate('LoginScreen')
-  //        setLoading(false)
-  //   }
-  //    else
-  //    {
-  //      setLoading(false)
-  //      //y3rd el false de
-  //      setErrortext(data.message)
-  //    }
+let respone = await data.json()
+  console.log(respone.message)
+    if (respone.message=='Success')
+    {
+         //Navigate To login
+  props.navigation.navigate('Login')
+         setLoading(false)
+    }
+     else
+     {
+       console.log("else")
+       setLoading(false)
+       //y3rd el false de
+       setErrortext(respone.message)
+
+     }
 
   } //post request if data.message=='sucess' >setLoadingfalse+ yro7 lel login else>serloading false w y3rd el error data.message
     // setErrortext('');
