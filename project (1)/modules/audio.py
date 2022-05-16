@@ -251,6 +251,8 @@ def findname ():
     mycursor.execute(sql)
     path = mycursor.fetchall()
     data, fs = sf.read(path[0][1], dtype='float32')  
-    play=sd.play(data, fs)
+    status=sd.play(data, fs)
+    play=sd.wait()
+    
     # return jsonify(path=path[0][1])
-    return jsonify(play)
+    return jsonify(play=play,path=path[0][1])

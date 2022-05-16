@@ -12,15 +12,19 @@ import {
   ScrollView,
   ImageBackground
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/AntDesign';
+import Dropdown from './Dropdown';
 // import Loader from './Components/Loader';
  
 const RegisterScreen = (props) => {
+  let Ip='192.168.1.17'
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userAge, setUserAge] = useState('');
   const [userAddress, setUserAddress] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [userGender, setUserGender] = useState('');
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState(['']);
   const [
@@ -29,11 +33,12 @@ const RegisterScreen = (props) => {
   ] = useState(false);
   const [text,setText]=useState([])
  let dataToSend = {
+  email: userEmail,
     name: userName,
-    email: userEmail,
     age: userAge,
+    gender:userGender,
     address: userAddress,
-    password: userPassword,
+    pass: userPassword,
   };
   const emailInputRef = createRef();
   const ageInputRef = createRef();
@@ -49,24 +54,55 @@ const RegisterScreen = (props) => {
       userPassword: Joi.string().regex((/^[a-zA-Z0-9]{3,30}$/)).required(),
       userAge: Joi.number().integer().min(5).max(50).required(),
       userEmail: Joi.string().email({tlds: { allow: ["com", "net"] }}).required(),
-      userAddress:Joi.string().alphanum().min(3).max(30).required()
+      userAddress:Joi.string().alphanum().min(3).max(30).required(),
+      userGender:Joi.string().alphanum().min(3).max(30).required()
 
   })
    
- return schema.validate( {userName:userName,userPassword:userPassword,userAge:userAge,userAddress:userAddress,userEmail:userEmail},{abortEarly:false});
+ return schema.validate( {userName:userName,userPassword:userPassword,userGender:userGender,userAge:userAge,userAddress:userAddress,userEmail:userEmail},{abortEarly:false});
  }
-  const handleSubmitButton = () => {
+  async function handleSubmitButton() {
     let validationRespone=ValidationHandler()
     console.log(dataToSend)
     console.log(validationRespone)
     console.log(text)
+    setLoading(true)
    if(validationRespone.error)
    {
      setText(validationRespone.error.details)
+     console.log(validationRespone.error.details)
+     setLoading(false)
     //  alert(validationRespone.error)
    }
-   else{setText([])} //post request if data.message=='sucess' >setLoadingfalse+ yro7 lel login else>serloading false w y3rd el error data.message
-    setErrortext('');
+   else{
+    setText([])
+    let {data} =await fetch(`http://${Ip}:8000/create`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...dataToSend
+
+
+      })
+    });  
+  //   if (data.message=='success')
+  //   {
+  //        //Navigate To login
+  // props.navigation.navigate('LoginScreen')
+  //        setLoading(false)
+  //   }
+  //    else
+  //    {
+  //      setLoading(false)
+  //      //y3rd el false de
+  //      setErrortext(data.message)
+  //    }
+
+  } //post request if data.message=='sucess' >setLoadingfalse+ yro7 lel login else>serloading false w y3rd el error data.message
+    // setErrortext('');
     // if (!userName) {
     //   alert(validationRespone.error);
     //   return;
@@ -201,7 +237,7 @@ const RegisterScreen = (props) => {
             </Text>
           } */}
 {text&&text.map((message,index)=><View key={index} style={{backgroundColor:'#ff9a98',padding:6,width:'98%',borderRadius:5,marginBottom:5,marginTop:5,display:'flex',justifyContent:'center',alignItems:'center',margin:'auto'}}><Text style={{fontWeight:'bold'}}>{message.message}</Text></View> )}
-
+{/* {errortext&&<View  style={{backgroundColor:'#ff9a98',padding:6,width:'98%',borderRadius:5,marginBottom:5,marginTop:5,display:'flex',justifyContent:'center',alignItems:'center',margin:'auto'}}><Text style={{fontWeight:'bold'}}>{errortext}</Text></View>} */}
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
@@ -254,6 +290,22 @@ const RegisterScreen = (props) => {
             />
           </View>
           <View style={styles.SectionStyle}>
+            {/* <Dropdown /> */}
+            <TextInput
+              style={styles.inputStyle}
+              onChangeText={(userGender) => setUserGender(userGender)}
+              underlineColorAndroid="#f000"
+              placeholder="Enter Gevder"
+              placeholderTextColor="#8b9cb5"
+              autoCapitalize="sentences"
+              returnKeyType="next"
+              // onSubmitEditing={() =>
+              //   emailInputRef.current && emailInputRef.current.focus()
+              // }
+              blurOnSubmit={false}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
               onChangeText={(UserAge) => setUserAge(UserAge)}
@@ -295,7 +347,7 @@ const RegisterScreen = (props) => {
             style={styles.buttonStyle}
             activeOpacity={0.5}
             onPress={handleSubmitButton}>
-            <Text style={styles.buttonTextStyle}> {loading?<Icon name='rock' size={30} color="white" /> :' REGISTER'} </Text>
+            <Text style={styles.buttonTextStyle}> {loading?<Icon name='loading1' size={30} color="white" /> :' REGISTER'} </Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </ScrollView>
@@ -304,7 +356,7 @@ const RegisterScreen = (props) => {
   );
 };
 export default RegisterScreen;
- 
+
 const styles = StyleSheet.create({
   SectionStyle: {
     display:'flex',

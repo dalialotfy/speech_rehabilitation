@@ -60,14 +60,14 @@ def Create_Tables():
 def Create_Users():
     mydb,mycursor = DB_Connection()
     mycursor.execute("USE AUDIOS")
-    sql="CREATE TABLE IF NOT EXISTS USERS (\
+    sql="CREATE TABLE IF NOT EXISTS Users (\
         User_ID int(11) NOT NULL AUTO_INCREMENT,\
-        First_Name varchar(14) NOT NULL,\
-        Last_Name varchar(16) NOT NULL,\
-        Email varchar(50) NOT NULL,\
+        Name varchar(14) NOT NULL,\
+        Email varchar(320) NOT NULL,\
         Pass varchar(30) NOT NULL,\
-        Birth_Date date NOT NULL,\
+        Age int(8) NOT NULL,\
         Gender enum('M','F') NOT NULL,\
+        Address varchar(50) NOT NULL,\
         PRIMARY KEY (`User_ID`))"
     mycursor.execute(sql)
     mydb.commit()  
