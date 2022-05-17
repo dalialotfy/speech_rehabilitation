@@ -18,7 +18,7 @@ import Dropdown from './Dropdown';
 // import Loader from './Components/Loader';
  
 const RegisterScreen = (props) => {
-  let Ip='192.168.1.17'
+  let Ip='192.168.1.2'
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userAge, setUserAge] = useState('');
@@ -27,10 +27,6 @@ const RegisterScreen = (props) => {
   const [userGender, setUserGender] = useState('');
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState(['']);
-  const [
-    isRegistraionSuccess,
-    setIsRegistraionSuccess
-  ] = useState(false);
   const [text,setText]=useState([])
  let dataToSend = {
   email: userEmail,
@@ -106,36 +102,6 @@ let respone = await data.json()
      }
 
   } //post request if data.message=='sucess' >setLoadingfalse+ yro7 lel login else>serloading false w y3rd el error data.message
-    // setErrortext('');
-    // if (!userName) {
-    //   alert(validationRespone.error);
-    //   return;
-    // }
-    // if (!userEmail) {
-    //   alert('Please fill Email');
-    //   return;
-    // }
-    // if (!userAge) {
-    //   alert('Please fill Age');
-    //   return;
-    // }
-    // if (!userAddress) {
-    //   alert('Please fill Address');
-    //   return;
-    // }
-    // if (!userPassword) {
-    //   alert('Please fill Password');
-    //   return;
-    // }
-    //Show Loader
-    // setLoading(true);
-    // dataToSend = {
-    //   name: userName,
-    //   email: userEmail,
-    //   age: userAge,
-    //   address: userAddress,
-    //   password: userPassword,
-    // };
     var formBody = [];
     for (var key in dataToSend) {
       var encodedKey = encodeURIComponent(key);
@@ -145,70 +111,7 @@ let respone = await data.json()
     }
     formBody = formBody.join(',');
     console.log(dataToSend)
- 
-    // fetch('http://localhost:3000/api/user/register', {
-    //   method: 'POST',
-    //   body: formBody,
-    //   headers: {
-    //     //Header Defination
-    //     'Content-Type':
-    //     'application/x-www-form-urlencoded;charset=UTF-8',
-    //   },
-    // })
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
-  //       //Hide Loader
-  //       setLoading(false);
-  //       console.log(responseJson);
-  //       // If server response message same as Data Matched
-  //       if (responseJson.status === 'success') {
-            //  setLoading(false)
-  //         setIsRegistraionSuccess(true);
-  //         console.log(
-  //           'Registration Successful. Please Login to proceed'
-  //         );
-  //       } else {
-            // setLoading(false)
-  //         setErrortext(responseJson.msg);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       //Hide Loader
-  //       setLoading(false);
-  //       console.error(error);
-  //     });
-  // 
 };
-  if (isRegistraionSuccess) {
-    return (
-      
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: '#251e51',
-          justifyContent: 'center',
-        }}>
-        {/* <Image
-          source={require('../Image/success.png')}
-          style={{
-            height: 150,
-            resizeMode: 'contain',
-            alignSelf: 'center'
-          }}
-        /> */}
-        <Text style={styles.successTextStyle}>
-          Registration Successful
-        </Text>
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          activeOpacity={0.5}
-          // onPress={() => props.navigation.navigate('LoginScreen')}
-          >
-          <Text style={styles.buttonTextStyle}>Login Now</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
   return (
     <>
  
@@ -223,23 +126,10 @@ let respone = await data.json()
           alignContent: 'center',
         }}>
         <View style={{alignItems: 'center'}}>
-          {/* <Image
-            source={require('../Image/aboutreact.png')}
-            style={{
-              width: '50%',
-              height: 100,
-              resizeMode: 'contain',
-              margin: 30,
-            }}
-          /> */}
         </View>
         <KeyboardAvoidingView enabled>
         <Text style={styles.text}>SIGN UP</Text>
-        {/* {text&&
-            <Text style={styles.errorTextStyle}>
-              {text}
-            </Text>
-          } */}
+
 {text&&text.map((message,index)=><View key={index} style={{backgroundColor:'#ff9a98',padding:6,width:'98%',borderRadius:5,marginBottom:5,marginTop:5,display:'flex',justifyContent:'center',alignItems:'center',margin:'auto'}}><Text style={{fontWeight:'bold'}}>{message.message}</Text></View> )}
 {/* {errortext&&<View  style={{backgroundColor:'#ff9a98',padding:6,width:'98%',borderRadius:5,marginBottom:5,marginTop:5,display:'flex',justifyContent:'center',alignItems:'center',margin:'auto'}}><Text style={{fontWeight:'bold'}}>{errortext}</Text></View>} */}
           <View style={styles.SectionStyle}>

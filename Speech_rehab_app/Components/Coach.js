@@ -3,7 +3,7 @@ import { Text,Button,StyleSheet ,ImageBackground} from 'react-native'
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
 import Dropdown from './Dropdown';
-let Ip='192.168.1.17'
+let Ip='192.168.1.2'
 export default function Coach() {
 
 /////////////////////////////// Random Name /////////////////////////////////////////

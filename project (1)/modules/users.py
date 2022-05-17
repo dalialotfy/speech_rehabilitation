@@ -9,9 +9,9 @@ users = Blueprint('Users_APIs',__name__,'modules')
 def add_user():
     if request.method == 'POST':
         data = request.get_json()
-        print(data)
+        # print(data)
         email=data['email']
-        print(email)
+        # print(email)
         mydb,mycursor=DB_Connection()
         mycursor.execute("USE AUDIOS")
         sql="SELECT * FROM Users WHERE Email = (%s)"
@@ -50,3 +50,26 @@ def get_user():
     
 # Find_Audio("Persons","Ahmed")
 # Find_Audio("Objects","Dolaab")
+
+
+@users.route('/logIn',methods=['POST'])
+def log_in():
+    data=request.get_json()
+    mydb,mycursor=DB_Connection()
+    mycursor.execute("USE AUDIOS")
+    try:
+        sql = "SELECT * FROM Users Where Email=%s"
+        val=(data['email'])
+        mycursor.execute(sql,(val,))
+        User = mycursor.fetchone()
+        if not User:
+            return jsonify({"msg":"Email Not Found, Please Enter a valid email"})
+        else:
+            if data['pass']!=User[3]:
+                return jsonify({"message":"Wrong Password"})
+            else:    
+                # return redirect(url_for("home"))
+                # return jsonify({"msg":"You Are Redirected"})
+                return jsonify({"message":"Success"})
+    except Exception as e:
+        return jsonify({"Error":str(e)})

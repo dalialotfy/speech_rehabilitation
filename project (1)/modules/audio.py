@@ -256,3 +256,23 @@ def findname ():
     
     # return jsonify(path=path[0][1])
     return jsonify(play=play,path=path[0][1])
+
+
+
+
+@audios.route('/play_list', methods=['GET','POST'])
+def play_list():
+    import sounddevice as sd
+    import soundfile as sf
+    data = request.get_json()
+    print(data)
+    toPlay=["Dataset\أجهزةكهربائية\تكييف.wav","Dataset\أفعال\أدخل.wav","Dataset\أسامىالغرف\صالة.wav"]
+    # toPlay=[]
+    if(toPlay):
+        for file in toPlay:    
+            data, fs = sf.read(file, dtype='float32')  
+            play=sd.play(data, fs)
+            status = sd.wait()  
+        return jsonify({"msg":"played success"})
+    else:
+        return jsonify({"msg":"Error, من فضلك كون جمله"})

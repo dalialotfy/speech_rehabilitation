@@ -12,7 +12,18 @@ const Modaal = (props) => {
   let [detail,setDetail]=useState([])
   let [path,setPath]=useState('')
   let count=0
-  let Ip='192.168.1.17'
+  let pathArray;
+  if(localStorage.getItem("pathArrays")=== null){
+    pathArray=[];
+    console.log("fadyyy")
+}
+else{
+  console.log("msh fadyyy")
+
+  pathArray = JSON.parse(localStorage.getItem("pathArrays")) ;
+ 
+}
+  let Ip='192.168.1.2'
 async function click()
   {
     setModalVisible(true)
@@ -41,7 +52,6 @@ async function click()
       }
     }
   }
-
   async function listen_db(id)
   {
     
@@ -53,10 +63,48 @@ async function click()
       let response = await fetch(`http://${Ip}:8000/findname/?table=${categs[c]}&id=${id}`)
       let finalResponse = await response.json()
       let path= finalResponse.path
+      console.log("Before push again",pathArray)
+      pathArray.push(path)
+      localStorage.setItem("pathArrays",JSON.stringify(pathArray) )
       console.log(path)
+      console.log(pathArray)
       }}
   }
+
+  async function playList()
+  {
+    let data =await fetch(`http://${Ip}:8000/play_list`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        toPlay: pathArray
+
+
+      })
+    });  
+  }
+  function clear()
+  {
+    // setModalVisible(!modalVisible);
+    // pathArray=null
+    localStorage.clear()
+    if(localStorage.getItem("pathArrays")=== null){
+      pathArray=[];
+      console.log("fadyyy")
+  }
+  else{
+    console.log("msh fadyyy")
   
+    pathArray = JSON.parse(localStorage.getItem("pathArrays")) ;
+   
+  }
+    console.log(pathArray)
+    console.log("clear")
+
+  }
   return (
     <View style={styles.centeredView}>
   
@@ -79,17 +127,23 @@ async function click()
             </Pressable>)}
             <Pressable
         style={[styles.button, styles.buttonClose]}
-        onPress={() => listen_db()}
+        onPress={() => playList()}
       >
         <Text style={styles.textStyle} >اسمع ما اخترته</Text>
       </Pressable>
+      <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => clear()}
+            >
+              <Text style={styles.textStyle}>الانتقال الى جملة جديدة</Text>
+            </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
             >
               <Text style={styles.textStyle}>إغلاق</Text>
             </Pressable>
-     
+
       
           </View>
           </ScrollView>
