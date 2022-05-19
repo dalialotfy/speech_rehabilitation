@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         width:1100,
         height:700,
       
-        backgroundColor:'rgba(238, 130, 238,0.7)',
+        backgroundColor:'rgba(173, 216, 230,0.5)',
         display:'flex',
         justifyContent:'flex-start',
         alignItems:'center'
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     {
       width:800,
       height:70,
-      backgroundColor:'purple',
+      backgroundColor:'#622da4',
       display:'flex',
       justifyContent:'center',
       alignItems:'center',
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
         width:700,
         height:450,
         margin:'auto',
-        backgroundColor:'purple',
+        backgroundColor:'rgb(0, 0, 128)',
         display:'flex',
         justifyContent:'center',
         alignItems:'center'

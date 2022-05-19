@@ -166,8 +166,8 @@ let respone = await data.json()
           <TouchableOpacity
             style={styles.buttonStyle}
             activeOpacity={0.5}
-            onPress={handleSubmitButton}
-            // onPress={ ()=>{props.navigation.navigate('Speech')}  }
+            // onPress={handleSubmitButton}
+            onPress={ ()=>{props.navigation.navigate('Speech')}  }
             >
             <Text style={styles.buttonTextStyle}> {loading?<Icon name='loading1' size={30} color="white" /> :' LOG IN'} </Text>
           </TouchableOpacity>
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     margin: 'auto',
   },
   buttonStyle: {
-    backgroundColor: '#7DE24E',
+    backgroundColor: '#622da4',
     borderWidth: 0,
     color: '#FFFFFF',
     borderColor: '#7DE24E',

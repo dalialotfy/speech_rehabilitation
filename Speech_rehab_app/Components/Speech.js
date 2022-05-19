@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button ,TouchableOpacity} from 'react-native';
 
 import { useEffect, useState } from 'react';
 import { ImageBackground } from 'react-native';
@@ -13,19 +13,20 @@ export default function Speech(props) {
       <View style={styles.spaceText}>
     <Text style={styles.title}>Choose the Mode :</Text></View>
     <View style ={styles.container} >
-<View style={styles.space}>
-    <Button 
-      title= 'Assistant Mode'
-      onPress={() =>
-       {props.navigation.navigate("Assistant")}}
-    />
-    </View>
-   <View style={styles.space}>
-        <Button style={styles.button1}
-      title= 'Coach Mode'
-      onPress={() =>{props.navigation.navigate("Coach")}}
-    />
-    </View> 
+    <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>
+              {props.navigation.navigate("Assistant")}}>
+            <Text style={styles.buttonTextStyle}> Assistant Mode </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>
+              {props.navigation.navigate("Coach")}}>
+            <Text style={styles.buttonTextStyle}> Coach Mode </Text>
+          </TouchableOpacity>
   </View>
   </ImageBackground></>
   )
@@ -83,5 +84,27 @@ const styles = StyleSheet.create({
     {
       height:300,
 
-    }
+    },
+    buttonStyle: {
+      backgroundColor: '#622da4',
+      borderWidth: 0,
+      color: '#FFFFFF',
+      borderColor: '#7DE24E',
+      height: 50,
+      alignItems: 'center',
+      borderRadius: 30,
+      // marginLeft: 35,
+      // marginRight: 35,
+      marginTop: 20,
+      marginBottom: 10,
+      margin:'auto',
+      justifyContent:'center',
+      width:'40%'
+    },
+    buttonTextStyle: {
+      color: '#FFFFFF',
+      paddingVertical: 10,
+      fontSize: 18,
+      fontWeight:'bold'
+    },
 });

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { Alert, Modal, StyleSheet, Text, Pressable, View ,TouchableOpacity} from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -54,33 +54,39 @@ async function click()
   }
   async function listen_db(id)
   {
-    
+
     //setModalVisible(true)
     for(let c=0;c<12;c++)
     {
+    
       if (props.categ==categs[c])
       {
       let response = await fetch(`http://${Ip}:8000/findname/?table=${categs[c]}&id=${id}`)
       let finalResponse = await response.json()
       let path= finalResponse.path
       console.log("Before push again",pathArray)
-      pathArray.push(path)
+      // pathArray.push(path)
+      // localStorage.setItem("pathArrays",JSON.stringify(pathArray) )
+      // console.log(path)
+      // console.log(pathArray)
+      let obj = {"id": id , "table":categs[c] }
+      pathArray.push(obj)
       localStorage.setItem("pathArrays",JSON.stringify(pathArray) )
-      console.log(path)
+      console.log(obj)
       console.log(pathArray)
       }}
   }
 
   async function playList()
   {
-    let data =await fetch(`http://${Ip}:8000/play_list`, {
+    let data =await fetch(`http://${Ip}:8000/get_list`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        toPlay: pathArray
+        pathArray
 
 
       })
@@ -150,13 +156,20 @@ async function click()
         </View>
 
       </Modal>
-      <Pressable
+      <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>
+              {click()}}>
+            <Text style={styles.buttonTextStyle}>{props.categ} </Text>
+          </TouchableOpacity>
+      {/* <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => click()}
       >
         <Text style={styles.textStyle}><Icon name={props.icon} size={30} color="white" />  {props.categ}</Text>
         
-      </Pressable>
+      </Pressable> */}
  
     </View>
   );
@@ -203,7 +216,29 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
-  }
+  },
+  buttonStyle: {
+    backgroundColor: '#622da4',
+    borderWidth: 0,
+    color: '#FFFFFF',
+    borderColor: '#7DE24E',
+    height: 40,
+    alignItems: 'center',
+    borderRadius: 30,
+    // marginLeft: 35,
+    // marginRight: 35,
+    marginTop: 50,
+    marginBottom: 50,
+    // margin:'auto',
+    justifyContent:'center',
+    width:'200%'
+  },
+  buttonTextStyle: {
+    color: '#FFFFFF',
+    paddingVertical: 10,
+    fontSize: 18,
+    fontWeight:'bold'
+  },
 });
 
 export default Modaal;

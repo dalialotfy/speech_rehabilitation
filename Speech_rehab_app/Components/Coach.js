@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text,Button,StyleSheet ,ImageBackground} from 'react-native'
+import { Text,Button,StyleSheet ,ImageBackground,TouchableOpacity} from 'react-native'
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
 import Dropdown from './Dropdown';
@@ -63,20 +63,41 @@ async function similarity()
       <View style={styles.container}>
           <View style={styles.square}> 
       <View style={styles.spaceText}><Text style={styles.title}>{randomNames}</Text></View>
-<View style={styles.space}>
-    <Button style={styles.button1} color='purple'  title= 'أظهر اسما عشوائيا'onPress={() =>{random()}}/>
-</View>
-<View style={styles.space}>
-    <Button style={styles.button1} color='purple'  title= 'شغل النطق السليم'onPress={() =>{listen_db()}}/>
-</View>
-<View style={styles.space}
-><Button style={styles.button1} color='purple' title={record} onPress={() =>{record_ur_voice()}}/>
-</View>
-<View style={styles.space}>    
-<Button style={styles.button1} color='purple' title= 'شغل صوتك'onPress={() =>{listen_ur_voice()}}/>
-</View>
-<View style={styles.space}>   
- <Button style={styles.button1} color='purple' title= 'مستوى التقدم'onPress={() =>{similarity()}}/></View>
+      <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>
+              {random()}}>
+            <Text style={styles.buttonTextStyle}> ًأظهر اسماً عشوائيا </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>
+              {listen_db()}}>
+            <Text style={styles.buttonTextStyle}>  شغل النطق السليم  </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>
+              {record_ur_voice()}}>
+            <Text style={styles.buttonTextStyle}> {record} </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>
+              {listen_ur_voice()}}>
+            <Text style={styles.buttonTextStyle}> شغل صوتك </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>
+              {similarity()}}>
+            <Text style={styles.buttonTextStyle}>  مستوى التقدم  </Text>
+          </TouchableOpacity>
 <View style={styles.space}>
      <Text style={styles.title}>{progress}</Text>
       </View>
@@ -168,11 +189,33 @@ const styles = StyleSheet.create({
     {
         width:1100,
         height:700,
-        backgroundColor:'rgba(238, 130, 238,0.7)',
+        backgroundColor:'rgba(173, 216, 230,0.5)',
         display:'flex',
         justifyContent:'center',
         alignItems:'center'
 
-    }
+    },
+    buttonStyle: {
+        backgroundColor: '#622da4',
+        borderWidth: 0,
+        color: '#FFFFFF',
+        borderColor: '#7DE24E',
+        height: 50,
+        alignItems: 'center',
+        borderRadius: 30,
+        // marginLeft: 35,
+        // marginRight: 35,
+        marginTop: 20,
+        marginBottom: 10,
+        margin:'auto',
+        justifyContent:'center',
+        width:'30%'
+      },
+      buttonTextStyle: {
+        color: '#FFFFFF',
+        paddingVertical: 10,
+        fontSize: 18,
+        fontWeight:'bold'
+      },
 
 });

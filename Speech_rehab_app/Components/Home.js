@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button,TouchableOpacity } from 'react-native';
 
 import { useEffect, useState } from 'react';
 import { ImageBackground } from 'react-native';
@@ -10,34 +10,6 @@ const img = {uri:"voice.jpg"}
 
 export default function Home(props) {
 
- function play()
- {
-  //  var Sound=require('react-native-sound')
-  //  Sound.setCategory('Playback');
-
-  // var audio = new Sound(
-  //   'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3',
-  //   null,
-  //   error => {
-  //     if (error) {
-  //       console.log('failed to load the sound', error);
-  //       return;
-  //     }
-  //     // if loaded successfully
-  //     console.log(
-  //       'duration in seconds: ' +
-  //         audio.getDuration() +
-  //         'number of channels: ' +
-  //         audio.getNumberOfChannels(),
-  //     );
-  //   },
-  // );
-  // const url = "http://lacavewebradio.chickenkiller.com:8000/stream.mp3";
-ReactNativeAudioStreaming.pause();
-// ReactNativeAudioStreaming.resume();
-// ReactNativeAudioStreaming.play(url, {showIniOSMediaCenter: true, showInAndroidNotifications: true});
-// ReactNativeAudioStreaming.stop();
- }
   return (
       <>
     <ImageBackground  source={require('../assets/voice.jpg')} resizeMode='cover' style={styles.image}>
@@ -46,23 +18,20 @@ ReactNativeAudioStreaming.pause();
       <View style={styles.spaceText}><Text style={styles.title}>Speech Rehabilitation App</Text>
 </View>
 {/* <Icon name="rocket" size={30} color="#900" /> */}
-<View style={styles.space}>
-    <Button 
-      title= 'Login'
-      onPress={() =>
-       {props.navigation.navigate("Login")}}
-    />
-    </View>
- <View style={styles.space}> 
-        <Button style={styles.button1}
-      title= 'Register'
-      onPress={() =>{props.navigation.navigate("Register")}}
-    /></View>  
-     <View style={styles.space}> 
-        <Button style={styles.button1}
-      title= 'PLAY'
-      onPress={() =>{play()}}
-    /></View> 
+    <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>
+              {props.navigation.navigate("Login")}}>
+            <Text style={styles.buttonTextStyle}> Login </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>
+              {props.navigation.navigate("Register")}}>
+            <Text style={styles.buttonTextStyle}> Register </Text>
+          </TouchableOpacity>
     </View>
     </ImageBackground>
   </>
@@ -96,7 +65,7 @@ const styles = StyleSheet.create({
     {   display:"flex",
         justifyContent:"center",
         alignItems:"flex-start",
-        fontSize:30,
+        fontSize:40,
         fontWeight:'100',
         marginTop:60,
         color:'white',
@@ -112,11 +81,33 @@ const styles = StyleSheet.create({
     space:
     {
       width:200,
-      height:50
+      height:40
     },
     spaceText:
     {
-      height:500,
+      height:450,
 
-    }
+    },
+    buttonStyle: {
+      backgroundColor: '#622da4',
+      borderWidth: 0,
+      color: '#FFFFFF',
+      borderColor: '#7DE24E',
+      height: 50,
+      alignItems: 'center',
+      borderRadius: 30,
+      // marginLeft: 35,
+      // marginRight: 35,
+      marginTop: 20,
+      marginBottom: 10,
+      margin:'auto',
+      justifyContent:'center',
+      width:'40%'
+    },
+    buttonTextStyle: {
+      color: '#FFFFFF',
+      paddingVertical: 10,
+      fontSize: 18,
+      fontWeight:'bold'
+    },
 });

@@ -251,28 +251,76 @@ def findname ():
     mycursor.execute(sql)
     path = mycursor.fetchall()
     data, fs = sf.read(path[0][1], dtype='float32')  
+    print(data)
     status=sd.play(data, fs)
     play=sd.wait()
     
-    # return jsonify(path=path[0][1])
+    # return jsonify(data)
     return jsonify(play=play,path=path[0][1])
 
 
 
 
-@audios.route('/play_list', methods=['GET','POST'])
-def play_list():
-    import sounddevice as sd
-    import soundfile as sf
-    data = request.get_json()
-    print(data)
-    toPlay=["Dataset\أجهزةكهربائية\تكييف.wav","Dataset\أفعال\أدخل.wav","Dataset\أسامىالغرف\صالة.wav"]
-    # toPlay=[]
-    if(toPlay):
-        for file in toPlay:    
-            data, fs = sf.read(file, dtype='float32')  
-            play=sd.play(data, fs)
-            status = sd.wait()  
-        return jsonify({"msg":"played success"})
-    else:
-        return jsonify({"msg":"Error, من فضلك كون جمله"})
+# @audios.route('/play_list', methods=['GET','POST'])
+# def play_list():
+#     import sounddevice as sd
+#     import soundfile as sf
+#     search = request.get_json()
+#     print(search["pathArray"])
+#     toPlay=["Dataset\أشخاص\آدم.wav","Dataset\أدوات_مدرسية\سبورة.wav","Dataset\أدوات_مدرسية\كشكول.wav"]
+#     # toPlay=[]
+#     if(search):
+#         for file in search:    
+#             data, fs = sf.read(file, dtype='float32')  
+#             play=sd.play(data, fs)
+#             status = sd.wait()  
+#         return jsonify({"msg":"played success"})
+#     else:
+#         return jsonify({"msg":"Error, من فضلك كون جمله"})
+
+# @audios.route('/get_play',methods=['GET','POST'])
+# def get_play():
+#     res = request.get_json()
+#     id = res["id"]
+#     table = res["table"]
+#     print(res)
+#     mydb,mycursor=DB_Connection()
+#     mycursor.execute("USE AUDIOS")
+#     sql = "SELECT Name,Path FROM {} WHERE Aud_ID ={}".format(table,id)
+#     mycursor.execute(sql)
+#     path = mycursor.fetchall()
+#     data, fs = sf.read(path[0][1], dtype='float32')  
+#     status=sd.play(data, fs)
+#     play=sd.wait()
+#     # return jsonify(path=path[0][1])
+#     return jsonify(play=status,path=path[0][1])
+
+
+
+@audios.route('/get_list',methods=['POST'])
+def get_list():
+    try:
+        res = request.get_json()
+        print(res['pathArray'])
+        paths=[]
+        if res['pathArray']:
+            for obj in res['pathArray']:
+                table = obj["table"]
+                id = obj["id"]
+                mydb,mycursor=DB_Connection()
+                mycursor.execute("USE AUDIOS")
+                sql = "SELECT Name,Path FROM {} WHERE Aud_ID ={}".format(table,id)
+                mycursor.execute(sql)
+                path = mycursor.fetchall()
+                paths.append(path[0][1])  
+            for path in paths:    
+                data,fs = sf.read(path,dtype='float32')  
+                play=sd.play(data, fs)
+                status = sd.wait() 
+            return jsonify({"msg":"played success"})
+            # return jsonify(play=status)
+
+        else: 
+            return jsonify({"msg":"Error, من فضلك كون جمله"})
+    except Exception as e:
+        return jsonify({"Error":str(e)})
