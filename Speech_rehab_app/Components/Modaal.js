@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View ,TouchableOpacity} from "react-native";
+import { Alert, Modal, StyleSheet, Text, Pressable, View ,TouchableOpacity,Platform} from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { ScrollView } from "react-native";
+import 'localstorage-polyfill'; 
+
 
 const Modaal = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -231,13 +233,15 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     // margin:'auto',
     justifyContent:'center',
-    width:'200%'
+    width:'400%',
+  
   },
   buttonTextStyle: {
     color: '#FFFFFF',
     paddingVertical: 10,
     fontSize: 18,
-    fontWeight:'bold'
+    fontWeight:'bold',
+    // padding:10
   },
 });
 

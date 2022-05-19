@@ -28,6 +28,7 @@ async function listen_db()
 let categs = ['أشخاص','أفعال','ملابس','طعام','أجهزة_كهربائية','غرف_النوم','مطبخ','غرفة_المعيشة','ألوان','أسامي_الغرف','أدوات_مدرسية']
 return (
       <>
+      <ScrollView>
     <ImageBackground source={require('../assets/coach.jpg')} resizeMode='cover' style={styles.image}>
       <View style={styles.container}>
           <View style={styles.square}>
@@ -69,7 +70,7 @@ return (
           </View>
 
 </View></View>
-</ImageBackground>
+</ImageBackground></ScrollView>
     </>
   )
 }
