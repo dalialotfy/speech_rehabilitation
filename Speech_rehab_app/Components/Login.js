@@ -116,7 +116,7 @@ let respone = await data.json()
         <View style={{alignItems: 'center'}}>
         </View>
         <KeyboardAvoidingView enabled>
-        <Text style={styles.text}>LOG IN</Text>
+        <Text style={styles.text}>تسجيل الدخول</Text>
 
 {text&&text.map((message,index)=><View key={index} style={{backgroundColor:'#ff9a98',padding:6,width:'98%',borderRadius:5,marginBottom:5,marginTop:5,display:'flex',justifyContent:'center',alignItems:'center',margin:'auto'}}><Text style={{fontWeight:'bold'}}>{message.message}</Text></View> )}
 {/* {errortext&&<View  style={{backgroundColor:'#ff9a98',padding:6,width:'98%',borderRadius:5,marginBottom:5,marginTop:5,display:'flex',justifyContent:'center',alignItems:'center',margin:'auto'}}><Text style={{fontWeight:'bold'}}>{errortext}</Text></View>} */}
@@ -125,7 +125,7 @@ let respone = await data.json()
               style={styles.inputStyle}
               onChangeText={(UserEmail) => setUserEmail(UserEmail)}
               underlineColorAndroid="#f000"
-              placeholder="Enter Email"
+              placeholder="أدحل الإيميل"
               placeholderTextColor="#8b9cb5"
               keyboardType="email-address"
               ref={emailInputRef}
@@ -144,7 +144,7 @@ let respone = await data.json()
                 setUserPassword(UserPassword)
               }
               underlineColorAndroid="#f000"
-              placeholder="Enter Password"
+              placeholder="أدحل كلمة السر"
               placeholderTextColor="#8b9cb5"
               ref={passwordInputRef}
               returnKeyType="next"
@@ -169,7 +169,7 @@ let respone = await data.json()
             // onPress={handleSubmitButton}
             onPress={ ()=>{props.navigation.navigate('Speech')}  }
             >
-            <Text style={styles.buttonTextStyle}> {loading?<Icon name='loading1' size={30} color="white" /> :' LOG IN'} </Text>
+            <Text style={styles.buttonTextStyle}> {loading?<Icon name='loading1' size={30} color="white" /> :' تسجيل الدخول'} </Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </ScrollView>

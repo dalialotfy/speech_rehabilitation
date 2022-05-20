@@ -24,26 +24,37 @@ export default function App() {
         <Stack.Screen
             name="Speech Rehabilitation App"
             component={Home}
+            options={{title:'تطبيق تأهيل النطق'}}
           />
           <Stack.Screen
             name="Login"
             component={Login}
+            options={{title:'تسجيل الدخول'}}
+
           />
                     <Stack.Screen
             name="Register"
             component={Register}
+            options={{title:'تسجيل '}}
+
           />
             <Stack.Screen
             name="Speech"
             component={Speech}
+            options={{title:'تأهيل النطق'}}
+
           />
           <Stack.Screen
             name="Assistant"
             component={Assistant}
+            options={{title:'المساعد '}}
+
           />
         <Stack.Screen
             name="Coach"
             component={Coach}
+            options={{title:'المدرب'}}
+
           />
           <Stack.Screen
             name="Modaal"

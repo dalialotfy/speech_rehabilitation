@@ -4,12 +4,12 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { ScrollView } from "react-native";
-import 'localstorage-polyfill'; 
+// import 'localstorage-polyfill'; 
 
 
 const Modaal = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
-  let categs = ['أشخاص','أفعال','ملابس','طعام','أجهزة_كهربائية','غرف_النوم','مطبخ','غرفة_المعيشة','ألوان','أسامي_الغرف','أدوات_مدرسية']
+  let categs = ['أشخاص','أفعال','حروف_الجر','ملابس','طعام','أجهزة_كهربائية','غرف_النوم','مطبخ','غرفة_المعيشة','ألوان','أسامي_الغرف','أدوات_مدرسية']
 //fun fetch w ab3t fel api query{categs[i]} w a7ot elfun de fe click() w a3ml equal lel result m3 detail
   let [detail,setDetail]=useState([])
   let [path,setPath]=useState('')
@@ -29,7 +29,7 @@ else{
 async function click()
   {
     setModalVisible(true)
-    for(let c=0;c<12;c++)
+    for(let c=0;c<13;c++)
     {
       if (props.categ==categs[c])
       {
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontSize: 18,
     fontWeight:'bold',
-    // padding:10
+    padding:25
   },
 });
 

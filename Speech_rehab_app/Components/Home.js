@@ -15,7 +15,7 @@ export default function Home(props) {
     <ImageBackground  source={require('../assets/voice.jpg')} resizeMode='cover' style={styles.image}>
 
     <View style ={styles.container} >
-      <View style={styles.spaceText}><Text style={styles.title}>Speech Rehabilitation App</Text>
+      <View style={styles.spaceText}><Text style={styles.title}>تطبيق لتأهيل النطق</Text>
 </View>
 {/* <Icon name="rocket" size={30} color="#900" /> */}
     <TouchableOpacity
@@ -23,14 +23,14 @@ export default function Home(props) {
             activeOpacity={0.5}
             onPress={() =>
               {props.navigation.navigate("Login")}}>
-            <Text style={styles.buttonTextStyle}> Login </Text>
+            <Text style={styles.buttonTextStyle}> تسجيل الدخول </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.buttonStyle}
             activeOpacity={0.5}
             onPress={() =>
               {props.navigation.navigate("Register")}}>
-            <Text style={styles.buttonTextStyle}> Register </Text>
+            <Text style={styles.buttonTextStyle}>  تسجيل حساب جديد </Text>
           </TouchableOpacity>
     </View>
     </ImageBackground>

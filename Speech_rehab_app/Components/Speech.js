@@ -5,28 +5,81 @@ import { useEffect, useState } from 'react';
 import { ImageBackground } from 'react-native';
 const img = {uri:"voice.jpg"}
 export default function Speech(props) {
+  const [style,setStyle]=useState("none")
+  const [title,setTitle]=useState("")
+  const [brief,setBrief]=useState("")
+  function Assistant()
+  {
+    setStyle("block")
+    setTitle("المساعد")
+    console.log(title)
+      setBrief(" يهدف هذا الجزء من التطبيق الى مساعدة الأشخاص الذين لديهم ضعف في تذكر الأشياء والأشخاص عن طريق عرض مختلف الأنشطة التي يمكن أن يحتاج إلى توصيلها للمجتمع حوله لتلبية احتياجاته للآخرين")
+  }
+  function Coach()
+  {
+    setStyle("block")
+    setTitle("المدرب")
+    console.log(title)
+    setBrief("يهدف هذا الجزء من التطبيق الى  تحسين النطق للأطفال والكبار عن طريق عرض أسماء عشوائية واستماعه إلى النطق السليم لها ثم محاولة تكرارها عن طريق تسجيلها بنفسه و من ثم مقارنتها مع النطق الصحيح ومتابعة التقدم ")
 
+
+  }
+  function NavigateHandler()
+  {
+    if (title=="المساعد")
+    {
+      props.navigation.navigate('Assistant')
+      console.log("hro7 lel mosa3ed")
+
+    }else
+    {
+      props.navigation.navigate('Coach')
+      console.log("hro7 lel modareb")
+
+
+    }
+  }
        
   return (
       <>
+
     <ImageBackground source={require('../assets/voice.jpg')} resizeMode='cover' style={styles.image}>
       <View style={styles.spaceText}>
-    <Text style={styles.title}>Choose the Mode :</Text></View>
+    <Text style={styles.title}>اختر الطريقة المناسبة للتعلم :</Text></View>
     <View style ={styles.container} >
     <TouchableOpacity
             style={styles.buttonStyle}
             activeOpacity={0.5}
+            onPress={() =>{Assistant()}}>
+            <Text style={styles.buttonTextStyle}> المساعد </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>{Coach()}}>
+            <Text style={styles.buttonTextStyle}> المدرب </Text>
+          </TouchableOpacity>
+          <View style={{backgroundColor:'rgba(173, 216, 230,0.5)', display: style}}>
+            <Text style={styles.buttonTextStyle}>{brief}
+            </Text>
+            <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
             onPress={() =>
-              {props.navigation.navigate("Assistant")}}>
-            <Text style={styles.buttonTextStyle}> Assistant Mode </Text>
+              {NavigateHandler()}}
+            >
+            <Text style={styles.buttonTextStyle}> استمرار</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.buttonStyle}
             activeOpacity={0.5}
             onPress={() =>
-              {props.navigation.navigate("Coach")}}>
-            <Text style={styles.buttonTextStyle}> Coach Mode </Text>
+              {setStyle("none")}}
+            >
+            <Text style={styles.buttonTextStyle}> إغلاق</Text>
           </TouchableOpacity>
+
+          </View>
   </View>
   </ImageBackground></>
   )
@@ -43,6 +96,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         fontSize:30,
+        position:'relative'
        
     },
     button1:
@@ -105,6 +159,15 @@ const styles = StyleSheet.create({
       color: '#FFFFFF',
       paddingVertical: 10,
       fontSize: 18,
-      fontWeight:'bold'
+      fontWeight:'bold',
+      textAlign:'center',
+      padding:10
     },
+    // comment:{
+    //   backgroundColor:'red',
+    //   position:'absolute',
+    //   top:-200,
+    //   left:0
+      
+    // }
 });
