@@ -125,7 +125,7 @@ let respone = await data.json()
               style={styles.inputStyle}
               onChangeText={(UserEmail) => setUserEmail(UserEmail)}
               underlineColorAndroid="#f000"
-              placeholder="أدحل الإيميل"
+              placeholder="أدخل الإيميل"
               placeholderTextColor="#8b9cb5"
               keyboardType="email-address"
               ref={emailInputRef}
@@ -144,7 +144,7 @@ let respone = await data.json()
                 setUserPassword(UserPassword)
               }
               underlineColorAndroid="#f000"
-              placeholder="أدحل كلمة السر"
+              placeholder="أدخل كلمة السر"
               placeholderTextColor="#8b9cb5"
               ref={passwordInputRef}
               returnKeyType="next"

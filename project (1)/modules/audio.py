@@ -2,6 +2,7 @@ from base64 import decode
 from flask import Blueprint,request,jsonify
 from random import randint
 import sys
+from numpy import int32
 from pydub import AudioSegment
 from pydub.playback import play 
 from datetime import date
@@ -182,13 +183,13 @@ def record_audio():
    # Start recorder with the given values
    # of duration and sample frequency
     recording = sd.rec(int(duration * freq),
-				samplerate=freq, channels=2)
+				samplerate=freq, channels=2,dtype=int32)
     # b, a = sg.butter(5, 1000. / (freq / 2.), 'high')
     # x_fil = sg.lfilter(b, a, recording)
     # Record audio for the given number of seconds
     print("start recording")
     sd.wait()
-    filename = "Rec/%s_%s_%s.wav"%(Random_Name,date.today().day,date.today().month)
+    filename = "Rec/24_4.wav"
     # This will convert the NumPy array to an audio
     # file with the given sampling frequency
     recordedAud=write(filename, freq, recording)
@@ -205,7 +206,7 @@ def play_audio():
     # mycursor.execute(sql)
     # audio = mycursor.fetchall()
     # Extract data and sampling rate from file
-    filename = "Rec/%s_%s_%s.wav"%(Random_Name,date.today().day,date.today().month)
+    filename = "Rec/24_4.wav"
     data, fs = sf.read(filename, dtype='float32')  
     play=sd.play(data, fs)
     status = sd.wait()  # Wait until file is done playing

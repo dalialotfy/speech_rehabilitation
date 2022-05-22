@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View ,TouchableOpacity,Platform} from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+// import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
+import Icon from 'react-native-vector-icons/AntDesign';
 import { ScrollView } from "react-native";
-// import 'localstorage-polyfill'; 
+import 'localstorage-polyfill'; 
 
 
 const Modaal = (props) => {
@@ -15,12 +15,14 @@ const Modaal = (props) => {
   let [path,setPath]=useState('')
   let count=0
   let pathArray;
+  let [Name,setName]=useState("")
+  
   if(localStorage.getItem("pathArrays")=== null){
     pathArray=[];
-    console.log("fadyyy")
+    // console.log("fadyyy")
 }
 else{
-  console.log("msh fadyyy")
+  // console.log("msh fadyyy")
 
   pathArray = JSON.parse(localStorage.getItem("pathArrays")) ;
  
@@ -33,10 +35,11 @@ async function click()
     {
       if (props.categ==categs[c])
       {
-         console.log(categs[c])
+        //  console.log(categs[c])
          let response = await fetch(`http://${Ip}:8000/category/?table=${categs[c]}`)
          let finalResponse = await response.json()
          console.log(finalResponse.Names)
+        //  finalResponse.Names.map((Names)=>{console.log(Names)})
         //  let categName=(finalResponse.Names).map(name=>name)
         // detail=categName.join("\n")
         setDetail(finalResponse.Names)
@@ -54,9 +57,11 @@ async function click()
       }
     }
   }
-  async function listen_db(id)
+  async function listen_db(id,Name)
   {
 
+
+    console.log(id)
     //setModalVisible(true)
     for(let c=0;c<12;c++)
     {
@@ -66,7 +71,7 @@ async function click()
       let response = await fetch(`http://${Ip}:8000/findname/?table=${categs[c]}&id=${id}`)
       let finalResponse = await response.json()
       let path= finalResponse.path
-      console.log("Before push again",pathArray)
+      // console.log("Before push again",pathArray)
       // pathArray.push(path)
       // localStorage.setItem("pathArrays",JSON.stringify(pathArray) )
       // console.log(path)
@@ -74,13 +79,19 @@ async function click()
       let obj = {"id": id , "table":categs[c] }
       pathArray.push(obj)
       localStorage.setItem("pathArrays",JSON.stringify(pathArray) )
-      console.log(obj)
-      console.log(pathArray)
+      // console.log(obj)
+      console.log("in listendb",pathArray)
+
       }}
+    setName(Name)
+    console.log(Name)
+    props.func(Name);
   }
 
   async function playList()
   {
+    console.log("fe fun esm3",pathArray) 
+
     let data =await fetch(`http://${Ip}:8000/get_list`, {
       method: 'POST',
       headers: {
@@ -92,8 +103,29 @@ async function click()
 
 
       })
-    });  
+    }); 
+    console.log("fe fun esm3",pathArray) 
   }
+//   function listen(name,idx)
+//  {
+//    listen_db(idx+1)
+//    setName(name)
+//    console.log(name)
+//    props.func(name);
+
+//  }
+
+   // function delete_One(index)
+  // {
+  //   // function check(){
+  //   //      return index
+  //   // }
+  //   // pathArray.find(check())
+  //   pathArray.splice(index,1)
+  //   console.log(index)
+  //   console.log(pathArray)
+  //   console.log("delete one")
+  // }
   function clear()
   {
     // setModalVisible(!modalVisible);
@@ -101,21 +133,21 @@ async function click()
     localStorage.clear()
     if(localStorage.getItem("pathArrays")=== null){
       pathArray=[];
-      console.log("fadyyy")
+      // console.log("fadyyy")
   }
   else{
-    console.log("msh fadyyy")
+    // console.log("msh fadyyy")
   
-    pathArray = JSON.parse(localStorage.getItem("pathArrays")) ;
+    pathArray = JSON.parse(localStorage.getItem("pathArrays"))
    
   }
-    console.log(pathArray)
-    console.log("clear")
+    // console.log(pathArray)
+    // console.log("clear")
 
   }
   return (
     <View style={styles.centeredView}>
-  
+
       <Modal
       propagateSwipe={true}
         animationType="fade"
@@ -126,12 +158,14 @@ async function click()
           setModalVisible(!modalVisible);
         }}
       >
-        
+             <ScrollView>
         <View style={styles.centeredView}>
-        <ScrollView>
+   <Text>{Name}</Text>
           <View style={styles.modalView}>
-            {detail.map((name,index)=><Pressable key={index} onPress={()=>listen_db(index+1)}>
-            <Text key={index} style={styles.modalText}>{name}</Text>
+            {detail.map((name,index)=><Pressable key={index} onPress={()=>listen_db(index+1,name) }>
+            <Text key={index} style={styles.buttonTextStyle}>  
+             {/* <Icon onPress={()=>{delete_One(index)}} name='delete' size={30} color="white" />     */}
+                                                    {name}</Text>
             </Pressable>)}
             <Pressable
         style={[styles.button, styles.buttonClose]}
@@ -154,15 +188,14 @@ async function click()
 
       
           </View>
-          </ScrollView>
-        </View>
 
+        </View>
+        </ScrollView>
       </Modal>
       <TouchableOpacity
             style={styles.buttonStyle}
             activeOpacity={0.5}
-            onPress={() =>
-              {click()}}>
+            onPress={() =>{click()}}>
             <Text style={styles.buttonTextStyle}>{props.categ} </Text>
           </TouchableOpacity>
       {/* <Pressable
@@ -185,10 +218,12 @@ const styles = StyleSheet.create({
     marginTop: 22
   },
   modalView: {
+    
     margin: 20,
-    backgroundColor: "white",
+    marginTop:200,
+    backgroundColor: "rgb(153, 130, 255)",
     borderRadius: 20,
-    padding: 35,
+    padding: 55,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -202,13 +237,15 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 10,
-    elevation: 2
+    elevation: 2,
+    marginBottom:10
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#622da4",
+  
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#622da4",
   },
   textStyle: {
     color: "white",
