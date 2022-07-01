@@ -30,7 +30,12 @@ def jaccard_similarity(x,y):
     intersection_cardinality = len(set.intersection(*[set(x), set(y)]))
     union_cardinality = len(set.union(*[set(x), set(y)]))
     return intersection_cardinality/float(union_cardinality)
-
+# codebook construction
+# KNN
+# >75 mo7awla gayeda
+# a2l mo7awla afdl lakn t7tag t7seen
+# interface disolay signal in web , conditions for progress
+# attractive categs
 def compare(ref_path,rec_path):
     validation=jaccard_similarity(ref_to_txt(ref_path),rec_to_txt(rec_path))
     if ((validation*100) <= 40):
