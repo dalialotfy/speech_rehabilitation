@@ -63,9 +63,19 @@ const Modaal = (props) => {
 
       }
     }
-    setName(Name)
+    // setName(Name)
+    let ArraySent;
+    if ((localStorage.getItem("ArraySent") === null)){
+      ArraySent=[];
+      }
+    else {
+      ArraySent = JSON.parse(localStorage.getItem("ArraySent"));
+    }
+    ArraySent.push(Name)
+    localStorage.setItem("ArraySent", JSON.stringify(ArraySent))
+ 
     console.log(Name)
-    props.func(Name);
+    props.func(ArraySent);
   }
 
   // async function playList() {

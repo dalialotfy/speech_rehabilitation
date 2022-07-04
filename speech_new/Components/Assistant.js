@@ -1,26 +1,57 @@
 import React from 'react'
 import { Text, Button, StyleSheet, ImageBackground, Pressable, Platform } from 'react-native'
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { useEffect, useState } from 'react';
 // import DropDownPicker from 'react-native-dropdown-picker';
 // import Dropdown from './Dropdown';
 import Modaal from './Modaal';
 import { ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icons from 'react-native-vector-icons/AntDesign';
+
+
 // import 'localstorage-polyfill'; 
 export default function Assistant(props) {
   // console.log(props)
   // ////////////
   let Ip = '192.168.1.7'
+  let [Names, setName] = useState(["ستظهر جملتك هنا ..."])
+  let names = ["علاء", "اسماعيل", "حسن", "محمد", "احمد", "توفيق"]
+  let food = ["لحمة", "فراخ", "ارز", "سمك", "فلفل", "طماطم"]
+  let [detail, setDetail] = useState([])
 
+
+  let categName = names.map(name => name)
+  detail = categName.join("\n")
+
+  //////////////////////////////////////////////////////////////////////////////////////
+  // let ArraySent;
   let pathArray;
-// ########################## local storage for path array ###########################
-  if (localStorage.getItem("pathArrays") === null) {
-    pathArray = [];
+// // ########################## local storage for path array ###########################
+// if ((localStorage.getItem("ArraySent") === null)){
+//   ArraySent=[];
+//   }
+// else {
+//   ArraySent = JSON.parse(localStorage.getItem("ArraySent"));
+// }
+if ((localStorage.getItem("pathArrays") === null)){
+  pathArray=[];
   }
-  else {
-    pathArray = JSON.parse(localStorage.getItem("pathArrays"));
+else {
+  pathArray = JSON.parse(localStorage.getItem("pathArrays"));
+}
+  
+const pull_data = (data) => {
+    // console.log(data)
+    // ArraySent.push(data)
+    // console.log(ArraySent)
+    // localStorage.setItem("ArraySent", JSON.stringify(ArraySent))
+    // console.log(ArraySent)
+    setName(data)
+ 
+
   }
+
   async function playList() {
     console.log("fe fun esm3", pathArray)
 
@@ -39,46 +70,22 @@ export default function Assistant(props) {
     console.log("fe fun esm3", pathArray)
   }
   // /////////////////////////////////////////////
-  let [Names, setName] = useState([])
-  let names = ["علاء", "اسماعيل", "حسن", "محمد", "احمد", "توفيق"]
-  let food = ["لحمة", "فراخ", "ارز", "سمك", "فلفل", "طماطم"]
-  let [detail, setDetail] = useState([])
 
-
-  let categName = names.map(name => name)
-  detail = categName.join("\n")
-  let ArraySent;
-  if (localStorage.getItem("ArraySent") === null) {
-    ArraySent = [];
-
-  }
-  else {
-
-
-    ArraySent = JSON.parse(localStorage.getItem("ArraySent"));
-
-  }
-  //////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////// Listen to db /////////////////////////////////////////
-  async function listen_db() {
-    let response = await fetch("")
-    let finalResponse = await response.json()
+  // async function listen_db() {
+  //   let response = await fetch("")
+  //   let finalResponse = await response.json()
 
-  }
-  const pull_data = (data) => {
-    console.log(data)
-    ArraySent.push(data)
-    console.log(ArraySent)
-    localStorage.setItem("ArraySent", JSON.stringify(ArraySent))
-    console.log(ArraySent)
-    setName(ArraySent)
-    //  }
+  // }
 
-  }
 
-  // function clear() {
+  function clear() {
+ 
+  
 
-  //   localStorage.clear()
+    localStorage.clear()
+    pathArray=[]
+    setName(["ستظهر جملتك هنا ..."])
   //   if (localStorage.getItem("ArraySent") === null) {
   //     ArraySent = [];
  
@@ -91,7 +98,7 @@ export default function Assistant(props) {
   //   }
 
 
-  // }
+  }
 
   let categs = ['أشخاص', 'أفعال', 'حروف_الجر', 'ملابس', 'طعام', 'أجهزة_كهربائية', 'غرف_النوم', 'مطبخ', 'غرفة_المعيشة', 'ألوان', 'أسامي_الغرف', 'أدوات_مدرسية']
   let imgs = [require(`../assets/categ/person.jpg`), require(`../assets/categ/action2.png`), require(`../assets/categ/word.png`), require(`../assets/categ/cloth.png`), require(`../assets/categ/food.jpg`), require(`../assets/categ/device.png`), require(`../assets/categ/room.jpg`),require(`../assets/categ/kitchen.png`), require(`../assets/categ/live.png`), require(`../assets/categ/color.png`), require(`../assets/categ/rooms.png`), require(`../assets/categ/school.png`)]
@@ -101,14 +108,20 @@ export default function Assistant(props) {
         <View style={{ flex: 1, backgroundColor: '#251e51', alignItems: 'center', justifyContent: 'center' }}>
           <Text style={styles.buttonTextStyle}>كون جملتك من التصنيفات التالية</Text>
           <View style={styles.spaceText}>
-              {ArraySent.map((name, index) =>
-                <Text key={index} style={styles.sentence}>{name}</Text>
-              )
-          }
-          <Icon onPress={playList} name='assistive-listening-systems' size={30} color="white" />
+              {Names.map((name, index) =><Text key={index} style={styles.sentence}>{name}</Text>)}
           </View>
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',flexDirection:Platform.OS === ('android')?'column':Platform.OS === ('ios')?'column':'row', flexWrap: 'wrap', alignContent: 'space-around', width: '80%' }}>
+           
+<View style={{  justifyContent: 'center', alignItems: 'center',flexDirection:Platform.OS === ('android')?'column':Platform.OS === ('ios')?'column':'row', flexWrap: 'wrap', alignContent: 'space-around', width: '40%' }}>
 
+          <TouchableOpacity onPress={playList}
+            style={styles.buttonStyle}>
+          <Text style={styles.buttonclearStyle}>  <Icon  style={{marginRight:10}}    name='assistive-listening-systems' size={30} color='white'/> اسمع الجملة </Text></TouchableOpacity>
+          <TouchableOpacity onPress={clear}
+            style={styles.buttonStyle}>
+          <Text style={styles.buttonclearStyle}>  <Icons  style={{marginRight:10}}  name="delete" size={30} color='white'/> امسح الجملة </Text></TouchableOpacity>
+</View>
+
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',flexDirection:Platform.OS === ('android')?'column':Platform.OS === ('ios')?'column':'row', flexWrap: 'wrap', alignContent: 'space-around', width: '80%' }}>
             <Modaal categ={categs[0]} imag={imgs[0]} func={pull_data} />
             <Modaal categ={categs[1]} imag={imgs[1]} func={pull_data} />
             <Modaal categ={categs[2]} imag={imgs[2]} func={pull_data} />
@@ -146,16 +159,17 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     color: '#FFFFFF',
     borderColor: '#7DE24E',
-    height: 50,
+    // height: 20,
     alignItems: 'center',
     borderRadius: 30,
+    padding:8,
     // marginLeft: 35,
     // marginRight: 35,
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: 14,
+    marginBottom: 14,
     margin: 'auto',
     justifyContent: 'center',
-    width: '40%'
+    // width: '50%'
  },
  buttonTextStyle: {
     color: '#FFFFFF',
@@ -169,6 +183,18 @@ const styles = StyleSheet.create({
 
 
  },
+ buttonclearStyle: {
+  color: '#FFFFFF',
+  //   paddingVertical: 10,
+  fontSize: 18,
+  fontWeight: 'bold',
+  justifyContent: 'center',
+  textAlign: 'center',
+  marginBottom: 20,
+  marginTop: 10
+
+
+},
  TextStyle:
  {
     color: '#FFFFFF',
@@ -190,7 +216,7 @@ const styles = StyleSheet.create({
  },
  sentence:
  {
-
+   
     color: '#FFFFFF',
     paddingVertical: 8,
     fontSize: 18,
@@ -204,7 +230,10 @@ const styles = StyleSheet.create({
   flexDirection:'row-reverse',
   margin:50,
   padding:10,
-  backgroundColor:'#622da4',
+  backgroundColor:'rgb(0 ,90, 194)',
+
+
+ 
 
 
  },
