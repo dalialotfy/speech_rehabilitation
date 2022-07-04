@@ -15,6 +15,8 @@ import Dropdown from './Components/Dropdown';
 import Modaal from './Components/Modaal';
 import 'text-encoding-polyfill'
 // import 'localstorage-polyfill'; 
+import SignalDisplay from './Components/SignalDisplay';
+import History from './Components/History';
 
 
 const Stack = createStackNavigator();
@@ -67,6 +69,18 @@ export default function App() {
           <Stack.Screen
             name="Modaal"
             component={Modaal}
+          />
+                  <Stack.Screen
+            name="SignalDisplay"
+            component={SignalDisplay}
+            options={{title:'اظهار الصوت بيانيا'}}
+
+          />
+          <Stack.Screen
+            name="History"
+            component={History}
+            options={{title:'بيانات المريض'}}
+
           />
         </Stack.Navigator>
       </NavigationContainer>

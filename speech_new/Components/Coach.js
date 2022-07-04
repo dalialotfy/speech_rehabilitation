@@ -2,9 +2,15 @@ import React from 'react'
 import { Text,Button,StyleSheet ,ImageBackground,TouchableOpacity} from 'react-native'
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
-import Dropdown from './Dropdown';
-let Ip='192.168.1.2'
-export default function Coach() {
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icons from 'react-native-vector-icons/Fontisto';
+
+
+
+
+let Ip='192.168.1.7'
+export default function Coach(props) {
 
 /////////////////////////////// Random Name /////////////////////////////////////////
 let [randomNames,setRandomNames] = useState("الكلمة")
@@ -57,6 +63,37 @@ async function similarity()
     let finalResponse = await response.json() 
     setProgress(finalResponse.Score)
 }
+// ///////////////////////////////////////////////////////////////////
+// ///////////////////////////Signal display ////////////////////////////////
+
+async function signalDisplay()
+{
+  let response = await fetch(`http://${Ip}:8000/display`)
+  let finalResponse = await response.json()
+  let Rec= finalResponse.Rec.substring(1)
+  let Ref= finalResponse.Ref.substring(1)
+  // Rec_plot= require(`D:/speech_rehabilitation_app/project (1)${Rec}`)
+  // Ref_plot =require(`D:/speech_rehabilitation_app/project (1)${Ref}`)
+  // Ref_plot =require(`../assets/plot/record.png`)
+  // console.log(Rec_plot)
+  // console.log(Ref_plot)
+}
+function navigate()
+{
+  console.log("signal display")
+  props.navigation.navigate('SignalDisplay')
+  signalDisplay()
+  
+}
+// //////////////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////
+// ///////////////////////////History ////////////////////////////////
+async function Historypatient()
+{
+  console.log("History")
+  props.navigation.navigate('History')
+}
+// //////////////////////////////////////////////////////////////////////////
   return (
       <>
     <ImageBackground source={require('../assets/coach.jpg')} resizeMode='cover' style={styles.image}>
@@ -98,9 +135,24 @@ async function similarity()
               {similarity()}}>
             <Text style={styles.buttonTextStyle}>  مستوى التقدم  </Text>
           </TouchableOpacity>
+
 <View style={styles.space}>
      <Text style={styles.title}>{progress}</Text>
       </View>
+      <View style={styles.row}>
+      <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() => navigate()}>
+            <Text style={styles.buttonTextStyle}>أظهر الصوت بيانيا<Icon  name="draw" size={30} color='white'/> </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>
+              {Historypatient()}}>
+            <Text style={styles.buttonTextStyle}>أظهر بيانات المريض<Icons  name="person" size={30} color='white'/> </Text>
+          </TouchableOpacity></View>
 </View>
 </View>
 </ImageBackground>
@@ -211,11 +263,17 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         width:'30%'
       },
+
       buttonTextStyle: {
         color: '#FFFFFF',
         paddingVertical: 10,
         fontSize: 18,
         fontWeight:'bold'
       },
+      row:
+      {
+        flexDirection:'row-reverse',
+        width:'70%'
+      }
 
 });

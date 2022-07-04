@@ -14,8 +14,6 @@ import {
 } from 'react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Dropdown from './Dropdown';
-// import Loader from './Components/Loader';
  
 const RegisterScreen = (props) => {
   let Ip='192.168.1.7'
