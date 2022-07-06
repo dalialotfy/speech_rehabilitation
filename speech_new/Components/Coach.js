@@ -5,16 +5,16 @@ import { useEffect, useState } from 'react';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icons from 'react-native-vector-icons/Fontisto';
+import jwtDecode from 'jwt-decode';
 
 
-
-
-let Ip='172.28.130.105'
+let Ip='192.168.1.7'
 export default function Coach(props) {
 
 /////////////////////////////// Random Name /////////////////////////////////////////
 let [randomNames,setRandomNames] = useState("الكلمة")
 let [progress,setProgress]=useState(0)
+let [userInfo,setUserInfo]=useState({})
 async function random()
 {
 // let Names = ["طارق","أميرة","ميار","رضوى","داليا"];
@@ -92,6 +92,12 @@ async function Historypatient()
 {
   console.log("History")
   props.navigation.navigate('History')
+
+  let encodeData= localStorage.getItem('userToken')
+  let userData= jwtDecode(encodeData)
+  setUserInfo(userData)
+  console.log(userData.user_Name)
+
 }
 // //////////////////////////////////////////////////////////////////////////
   return (

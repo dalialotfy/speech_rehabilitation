@@ -16,7 +16,7 @@ import {
 import Icon from 'react-native-vector-icons/AntDesign';
  
 const RegisterScreen = (props) => {
-  let Ip='172.28.130.105'
+  let Ip='192.168.1.7'
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userAge, setUserAge] = useState('');
@@ -52,7 +52,7 @@ const RegisterScreen = (props) => {
       userEmail: Joi.string().email({tlds: { allow: ["com", "net"] }}).required(),
       userAddress:Joi.string().alphanum().min(3).max(30).required(),
       userGender:Joi.string().alphanum().min(1).max(30).required(),
-      userRole: Joi.string().alphanum().min(3).max(30).required(),
+      // userRole: Joi.string().alphanum().min(3).max(30).required(),
 
 
   })

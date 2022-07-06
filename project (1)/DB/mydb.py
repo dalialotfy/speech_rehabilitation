@@ -68,6 +68,7 @@ def Create_Users():
         Age int(8) NOT NULL,\
         Gender enum('M','F') NOT NULL,\
         Address varchar(50) NOT NULL,\
+        Role varchar(50) DEFAULT 'Patient' ,\
         PRIMARY KEY (`User_ID`))"
     mycursor.execute(sql)
     mydb.commit()  

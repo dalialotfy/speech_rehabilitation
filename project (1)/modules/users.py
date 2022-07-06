@@ -2,7 +2,11 @@ from flask import Blueprint,request,jsonify
 import sys
 sys.path.append('../project (1)')
 from DB.mydb import *
+from flask import Blueprint,request,jsonify, make_response, session, current_app
 
+import jwt
+from datetime import datetime, timedelta
+from functools import wraps
 users = Blueprint('Users_APIs',__name__,'modules')
 
 @users.route("/create",methods=['POST'])
@@ -27,8 +31,9 @@ def add_user():
             age=data['age']
             gender=data['gender']
             address=data['address']
-            sql="INSERT INTO Users (Name,Email,Pass,Age,Gender,Address) VALUES (%s,%s,%s,%s,%s,%s)"
-            val=(name,email,pw,age,gender,address)
+            Role=data['role']
+            sql="INSERT INTO Users (Name,Email,Pass,Age,Gender,Address,Role) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+            val=(name,email,pw,age,gender,address,Role)
             mycursor.execute(sql,val)
             mydb.commit() 
             mycursor.close()
@@ -68,8 +73,19 @@ def log_in():
             if data['pass']!=User[3]:
                 return jsonify({"message":"Wrong Password"})
             else:    
-                # return redirect(url_for("home"))
-                # return jsonify({"msg":"You Are Redirected"})
-                return jsonify({"message":"Success"})
+                print (User)
+                session['logged_in']=True
+                session['role']="Doctor"
+                token = jwt.encode({
+                    'user_ID':User[0],
+                    'user_Name':User[1],
+                    'user_email':data['email'],
+                    'user_age':User[4],
+                    'user_gender':User[5],
+                    'user_address':User[6],
+                    'user_role':User[7],
+                    'expiration':str(datetime.utcnow()+timedelta(minutes=15))},
+                    current_app.config['SECRET_KEY'])
+                return jsonify({'Message':"Success",'Token':token})
     except Exception as e:
         return jsonify({"Error":str(e)})

@@ -26,9 +26,10 @@ export default function SignalDisplay() {
             {/* <Text style={styles.buttonTextStyle}> الصوت بيانيا </Text> */}
           {/* </TouchableOpacity> */}
     {/* <Image style={styles.img} source={Rec_plot}/> */}
-{  <Image style={styles.img} source={require(`D:/speech_rehabilitation_app/project (1)/plot/record.png`)}/>}
-{  <Image style={styles.img} source={require(`D:/speech_rehabilitation_app/project (1)/plot/reference.png`)}/>
-}    </View>
+{/* {  <Image style={styles.img} source={require(`D:/speech_rehabilitation_app/project (1)/plot/record.png`)}/>}
+{  <Image style={styles.img} source={require(`D:/speech_rehabilitation_app/project (1)/plot/reference.png`)}/> */}
+{/* }    */}
+ </View>
     </View>
   )
   {loading?<Icon name='loading1' size={30} color="white" /> :' تسجيل'} 

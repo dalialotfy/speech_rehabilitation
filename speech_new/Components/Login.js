@@ -1,5 +1,6 @@
 import React, {useState, createRef} from 'react';
 // import Joi from 'joi'
+import jwtDecode from 'jwt-decode';
 import {
   StyleSheet,
   TextInput,
@@ -18,7 +19,7 @@ import Dropdown from './Dropdown';
 // import Loader from './Components/Loader';
  
 const Login= (props) => {
-  let Ip='172.28.130.105'
+  let Ip='192.168.1.7'
 
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
@@ -71,10 +72,15 @@ const Login= (props) => {
 
       })
     });  
-let respone = await data.json()
-  console.log(respone.message)
-    if (respone.message=='Success')
+let response = await data.json()
+  console.log(response)
+    if (response.Message=='Success')
     {
+      console.log(response.Token)
+      let userToken = response.Token
+      localStorage.setItem("userToken",userToken)
+      let decode=jwtDecode(userToken)
+      console.log(decode)
          //Navigate To login
   props.navigation.navigate('Speech')
          setLoading(false)
@@ -84,7 +90,7 @@ let respone = await data.json()
        console.log("else")
        setLoading(false)
        //y3rd el false de
-       setErrortext(respone.message)
+       setErrortext(response.Message)
 
      }
 
@@ -166,8 +172,8 @@ let respone = await data.json()
           <TouchableOpacity
             style={styles.buttonStyle}
             activeOpacity={0.5}
-            // onPress={handleSubmitButton}
-            onPress={ ()=>{props.navigation.navigate('Speech')}  }
+            onPress={handleSubmitButton}
+            // onPress={ ()=>{props.navigation.navigate('Speech')}  }
             >
             <Text style={styles.buttonTextStyle}> {loading?<Icon name='loading1' size={30} color="white" /> :' تسجيل الدخول'} </Text>
           </TouchableOpacity>

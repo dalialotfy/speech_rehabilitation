@@ -14,7 +14,7 @@ import Icons from 'react-native-vector-icons/AntDesign';
 export default function Assistant(props) {
   // console.log(props)
   // ////////////
-  let Ip = '172.28.130.105'
+  let Ip = '192.168.1.7'
   let [Names, setName] = useState(["ستظهر جملتك هنا ..."])
   let names = ["علاء", "اسماعيل", "حسن", "محمد", "احمد", "توفيق"]
   let food = ["لحمة", "فراخ", "ارز", "سمك", "فلفل", "طماطم"]

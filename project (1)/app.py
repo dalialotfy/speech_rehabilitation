@@ -7,6 +7,7 @@ from modules.audio import *
 
 
 app=Flask(__name__)
+app.config['SECRET_KEY']='Secret_Key_Radwa'
 
 CORS(app)
 cors = CORS(app, resource={
@@ -23,5 +24,5 @@ def main():
     return 'main'
 if __name__ == "__main__":
     # app.run(host='192.168.188.174', port= 8000, debug=True)
-    app.run(host= '172.28.130.105',port= 8000,debug=False)
+    app.run(host= '192.168.1.7',port= 8000,debug=False)
     # app.run(port= 8000,debug=False)
