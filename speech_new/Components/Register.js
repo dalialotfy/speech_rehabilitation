@@ -16,7 +16,7 @@ import {
 import Icon from 'react-native-vector-icons/AntDesign';
  
 const RegisterScreen = (props) => {
-  let Ip='192.168.1.7'
+  let Ip='172.28.130.105'
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userAge, setUserAge] = useState('');
@@ -25,6 +25,7 @@ const RegisterScreen = (props) => {
   const [userGender, setUserGender] = useState('');
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState(['']);
+  const [userRole, setRole] = useState(['']);
   const [text,setText]=useState([])
  let dataToSend = {
   email: userEmail,
@@ -33,6 +34,7 @@ const RegisterScreen = (props) => {
     gender:userGender,
     address: userAddress,
     pass: userPassword,
+    role: userRole,
   };
   const emailInputRef = createRef();
   const ageInputRef = createRef();
@@ -49,7 +51,9 @@ const RegisterScreen = (props) => {
       userAge: Joi.number().integer().min(5).max(50).required(),
       userEmail: Joi.string().email({tlds: { allow: ["com", "net"] }}).required(),
       userAddress:Joi.string().alphanum().min(3).max(30).required(),
-      userGender:Joi.string().alphanum().min(1).max(30).required()
+      userGender:Joi.string().alphanum().min(1).max(30).required(),
+      userRole: Joi.string().alphanum().min(3).max(30).required(),
+
 
   })
    
@@ -230,6 +234,23 @@ let respone = await data.json()
               blurOnSubmit={false}
             />
           </View>
+
+          <View style={styles.SectionStyle}>
+            {/* <Dropdown /> */}
+            <TextInput
+              style={styles.inputStyle}
+              onChangeText={(userRole) => setRole(userRole)}
+              underlineColorAndroid="#f000"
+              placeholder="الوظيفة"
+              placeholderTextColor="#8b9cb5"
+              autoCapitalize="sentences"
+              returnKeyType="next"
+              // onSubmitEditing={() =>
+              //   emailInputRef.current && emailInputRef.current.focus()
+              // }
+              blurOnSubmit={false}
+            />
+          </View>
           {errortext != '' ? (
             <Text style={styles.errorTextStyle}>
               {errortext}
@@ -256,8 +277,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent:'center',
 
-    height: 60,
-    marginTop: 30,
+    height: 50,
+    marginTop: 20,
     // marginLeft: 35,
     // marginRight: 35,
     margin: 'auto',

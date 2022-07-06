@@ -6,7 +6,7 @@ import { ScrollView } from "react-native";
 
 
 const Modaal = (props) => {
-  let Ip = '192.168.1.7'
+  let Ip = '172.28.130.105'
 
   const [modalVisible, setModalVisible] = useState(false);
   let categs = ['أشخاص', 'أفعال', 'حروف_الجر', 'ملابس', 'طعام', 'أجهزة_كهربائية', 'غرف_النوم', 'مطبخ', 'غرفة_المعيشة', 'ألوان', 'أسامي_الغرف', 'أدوات_مدرسية']

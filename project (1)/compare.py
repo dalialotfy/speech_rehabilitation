@@ -60,65 +60,9 @@ def compare(ref_path,rec_path):
  
 def play_Ref(file_path):
     return play(AudioSegment.from_wav(file_path))
-    # return play(AudioSegment.from_wav("./Dataset\أشخاص\شروق.wav"))
-        
-# def record(file_path):
-#     seconds = 2
-#     p = pyaudio.PyAudio()  # Create an interface to PortAudio
-#     print('Recording')
-#     stream = p.open(format=pyaudio.paInt16,channels=2,rate=44100,frames_per_buffer=1024,input=True)
-#     frames = []  # Initialize array to store frames
-#     for i in range(0, int(44100 / 1024 * seconds)):
-#         data = stream.read(1024)
-#         frames.append(data)
-#     # Stop and close the stream 
-#     stream.stop_stream()
-#     stream.close()
-#     # Terminate the PortAudio interface
-#     p.terminate()
-#     print('Finished recording')
-#     # Save the recorded data as a WAV file
-#     wf = wave.open(file_path, 'wb')
-#     wf.setnchannels(2)
-#     wf.setsampwidth(p.get_sample_size(pyaudio.paInt16))
-#     wf.setframerate(44100)
-#     wf.writeframes(b''.join(frames))
-#     wf.close()
-#     print("Your Record ... ")
-#     play(AudioSegment.from_wav(file_path))
+
     
 
 
 ref_file_name = "./Dataset\أشخاص\شروق.wav"
 rec_file_name = "rec.wav" 
-# play_Ref(ref_file_name)
-# record(rec_file_name)
-# print(compare(ref_file_name,rec_file_name))
-
-
-# from importlib.resources import path
-# import mysql.connector
-# from DB.mydb import *
-
-# def Find_Audio(Table,Audio):
-#     """Search For Specific Audio in Specific Table
-
-#     Args:
-#         Table: Category to search in
-#         Audio: Audio to search for
-
-#     Returns:
-#         Path: local path of the audio in DataSet Folder
-#     """
-#     mydb,mycursor=DB_Connection()
-#     mycursor.execute("USE AUDIOS")
-#     # sql = "SELECT Path FROM Persons WHERE Name ='Ahmed' "
-#     sql = "SELECT Path FROM {} WHERE Name ='{}'".format(Table,Audio)
-#     mycursor.execute(sql)
-#     paths = mycursor.fetchall()
-#     print(paths[0][0])
-#     return path
-#     # file=os.startfile(paths[0][0])
-    
-# Find_Audio("Persons","Ahmed")
-# Find_Audio("Objects","Dolaab")

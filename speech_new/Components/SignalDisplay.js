@@ -6,10 +6,10 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 export default function SignalDisplay() {
 
-let [sec,setSec]=useState(false)
-        setTimeout(() => {
-            setSec(true)
-        }, 5000);
+// let [sec,setSec]=useState(false)
+//         setTimeout(() => {
+//             setSec(true)
+//         }, 5000);
       
 
   
@@ -26,8 +26,8 @@ let [sec,setSec]=useState(false)
             {/* <Text style={styles.buttonTextStyle}> الصوت بيانيا </Text> */}
           {/* </TouchableOpacity> */}
     {/* <Image style={styles.img} source={Rec_plot}/> */}
-{ sec? <Image style={styles.img} source={require(`D:/speech_rehabilitation_app/project (1)/plot/record.png`)}/>:<Icon name='loading1' size={70} color="white" />}
-{ sec&&   <Image style={styles.img} source={require(`D:/speech_rehabilitation_app/project (1)/plot/reference.png`)}/>
+{  <Image style={styles.img} source={require(`D:/speech_rehabilitation_app/project (1)/plot/record.png`)}/>}
+{  <Image style={styles.img} source={require(`D:/speech_rehabilitation_app/project (1)/plot/reference.png`)}/>
 }    </View>
     </View>
   )

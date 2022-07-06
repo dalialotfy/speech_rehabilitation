@@ -17,7 +17,7 @@ import 'text-encoding-polyfill'
 // import 'localstorage-polyfill'; 
 import SignalDisplay from './Components/SignalDisplay';
 import History from './Components/History';
-
+import jwtDecode from 'jwt-decode';
 
 const Stack = createStackNavigator();
 export default function App() {
