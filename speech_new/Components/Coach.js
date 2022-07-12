@@ -1,16 +1,17 @@
 import React from 'react'
-import { Text,Button,StyleSheet ,ImageBackground,TouchableOpacity} from 'react-native'
+import { Text,Button,StyleSheet ,ImageBackground,TouchableOpacity,ScrollView,Platform} from 'react-native'
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icons from 'react-native-vector-icons/Fontisto';
 import jwtDecode from 'jwt-decode';
+// import 'localstorage-polyfill'; 
 
 
-let Ip='192.168.1.7'
+
 export default function Coach(props) {
-
+let Ip='192.168.1.7'
 /////////////////////////////// Random Name /////////////////////////////////////////
 let [randomNames,setRandomNames] = useState("الكلمة")
 let [progress,setProgress]=useState(0)
@@ -38,8 +39,9 @@ async function listen_db()
 let[record , setRecord ]= useState("سجل صوتك")
 async function record_ur_voice()
 {
+    let userToken = localStorage.getItem("userToken")
     setRecord("التسجيل يبدأ ...")  
-    let response = await fetch(`http://${Ip}:8000/record`)
+    let response = await fetch(`http://${Ip}:8000/record?token=${userToken}`)
     let finalResponse = await response.json()
    
 }
@@ -85,6 +87,7 @@ function navigate()
   signalDisplay()
   
 }
+
 // //////////////////////////////////////////////////////////////////////////
 // ///////////////////////////////////////////////////////////////////
 // ///////////////////////////History ////////////////////////////////
@@ -101,7 +104,7 @@ async function Historypatient()
 }
 // //////////////////////////////////////////////////////////////////////////
   return (
-      <>
+      <ScrollView >
     <ImageBackground source={require('../assets/coach.jpg')} resizeMode='cover' style={styles.image}>
       <View style={styles.container}>
           <View style={styles.square}> 
@@ -157,12 +160,12 @@ async function Historypatient()
             activeOpacity={0.5}
             onPress={() =>
               {Historypatient()}}>
-            <Text style={styles.buttonTextStyle}>أظهر بيانات المريض<Icons  name="person" size={30} color='white'/> </Text>
+            <Text style={styles.buttonTextStyle}> أظهر بيانات المريض <Icons  name="person" size={30} color='white'/> </Text>
           </TouchableOpacity></View>
 </View>
 </View>
 </ImageBackground>
-    </>
+    </ScrollView>
   )
 }
 
@@ -231,11 +234,11 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: "center"
     },
-    space:
-    {
-        width:100,
-        height:100
-    },
+    // space:
+    // {
+    //     width:100,
+    //     height:100
+    // },
     spaceText:
     {
         width:90,
@@ -278,8 +281,11 @@ const styles = StyleSheet.create({
       },
       row:
       {
-        flexDirection:'row-reverse',
-        width:'70%'
+        flexDirection:Platform.OS === ('android')?'column':Platform.OS === ('ios')?'column':'row',
+        width:'70%',
+   
+        alignItems:'center',
+      
       }
 
 });

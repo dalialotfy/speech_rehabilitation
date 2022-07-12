@@ -18,11 +18,11 @@ import 'text-encoding-polyfill'
 import SignalDisplay from './Components/SignalDisplay';
 import History from './Components/History';
 import jwtDecode from 'jwt-decode';
+import SearchHis from './Components/SearchHis';
 
 const Stack = createStackNavigator();
 export default function App() {
-
-
+let Ip='192.168.1.7'
 
   return (
       <NavigationContainer>
@@ -82,6 +82,12 @@ export default function App() {
             name="History"
             component={History}
             options={{title:'بيانات المريض'}}
+
+          />
+                    <Stack.Screen
+            name="SearchHis"
+            component={SearchHis}
+            options={{title:'البحث في بيانات المرضى'}}
 
           />
         </Stack.Navigator>

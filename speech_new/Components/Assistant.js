@@ -8,12 +8,9 @@ import Modaal from './Modaal';
 import { ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icons from 'react-native-vector-icons/AntDesign';
-
-
 // import 'localstorage-polyfill'; 
+
 export default function Assistant(props) {
-  // console.log(props)
-  // ////////////
   let Ip = '192.168.1.7'
   let [Names, setName] = useState(["ستظهر جملتك هنا ..."])
   let names = ["علاء", "اسماعيل", "حسن", "محمد", "احمد", "توفيق"]
@@ -23,17 +20,8 @@ export default function Assistant(props) {
 
   let categName = names.map(name => name)
   detail = categName.join("\n")
-
-  //////////////////////////////////////////////////////////////////////////////////////
-  // let ArraySent;
   let pathArray;
-// // ########################## local storage for path array ###########################
-// if ((localStorage.getItem("ArraySent") === null)){
-//   ArraySent=[];
-//   }
-// else {
-//   ArraySent = JSON.parse(localStorage.getItem("ArraySent"));
-// }
+
 if ((localStorage.getItem("pathArrays") === null)){
   pathArray=[];
   }
@@ -41,16 +29,11 @@ else {
   pathArray = JSON.parse(localStorage.getItem("pathArrays"));
 }
   
-const pull_data = (data) => {
-    // console.log(data)
-    // ArraySent.push(data)
-    // console.log(ArraySent)
-    // localStorage.setItem("ArraySent", JSON.stringify(ArraySent))
-    // console.log(ArraySent)
-    setName(data)
- 
+const pull_data = (data) => 
+{
 
-  }
+    setName(data)
+}
 
   async function playList() {
     console.log("fe fun esm3", pathArray)
@@ -69,35 +52,14 @@ const pull_data = (data) => {
     });
     console.log("fe fun esm3", pathArray)
   }
-  // /////////////////////////////////////////////
-
-  /////////////////////////////// Listen to db /////////////////////////////////////////
-  // async function listen_db() {
-  //   let response = await fetch("")
-  //   let finalResponse = await response.json()
-
-  // }
 
 
-  function clear() {
- 
-  
 
+  function clear() 
+  {
     localStorage.clear()
     pathArray=[]
     setName(["ستظهر جملتك هنا ..."])
-  //   if (localStorage.getItem("ArraySent") === null) {
-  //     ArraySent = [];
- 
-  //   }
-  //   else {
- 
-
-  //     ArraySent = JSON.parse(localStorage.getItem("ArraySent"))
-
-  //   }
-
-
   }
 
   let categs = ['أشخاص', 'أفعال', 'حروف_الجر', 'ملابس', 'طعام', 'أجهزة_كهربائية', 'غرف_النوم', 'مطبخ', 'غرفة_المعيشة', 'ألوان', 'أسامي_الغرف', 'أدوات_مدرسية']

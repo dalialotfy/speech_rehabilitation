@@ -13,10 +13,8 @@ import {
   ScrollView,
   ImageBackground
 } from 'react-native';
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Dropdown from './Dropdown';
-// import Loader from './Components/Loader';
  
 const Login= (props) => {
   let Ip='192.168.1.7'
@@ -73,25 +71,32 @@ const Login= (props) => {
       })
     });  
 let response = await data.json()
-  console.log(response)
-    if (response.Message=='Success')
+  console.log(response.Token)
+
+  let userToken = localStorage.setItem("userToken", response.Token)
+  // let decode=jwtDecode(userToken)
+  // console.log(decode)
+    if (response.Message==`Success patient`)
     {
-      console.log(response.Token)
-      let userToken = response.Token
-      localStorage.setItem("userToken",userToken)
-      let decode=jwtDecode(userToken)
-      console.log(decode)
+      console.log(response.Message)
+
          //Navigate To login
   props.navigation.navigate('Speech')
          setLoading(false)
     }
-     else
+     else if (response.Message==`Success doctor`)
      {
-       console.log("else")
-       setLoading(false)
-       //y3rd el false de
-       setErrortext(response.Message)
+      console.log(response.Message)
+      props.navigation.navigate('SearchHis')
 
+
+     }
+     else{
+      console.log("else")
+      console.log(response.Message)
+      setLoading(false)
+      //y3rd el false de
+      setErrortext(response.Message)
      }
 
   } //post request if data.message=='sucess' >setLoadingfalse+ yro7 lel login else>serloading false w y3rd el error data.message

@@ -83,6 +83,8 @@ def Create_Records():
         Record_Name VARCHAR (255) NOT NULL,\
         Record_Path VARCHAR(255) NOT NULL,\
         Rec_User int(11) NOT NULL,\
+        Score varchar(320),\
+        Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\
         PRIMARY KEY (`Record_ID`),\
         KEY Rec_User (Rec_User),\
         FOREIGN KEY (Rec_User)\

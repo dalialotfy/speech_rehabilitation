@@ -183,7 +183,6 @@ const styles = StyleSheet.create({
     buttonTextStyle: {
       color: '#FFFFFF',
       paddingVertical: 10,
-      // paddingHorizontal:50,
       fontSize: 18,
       fontWeight:'bold',
       textAlign:'center',
